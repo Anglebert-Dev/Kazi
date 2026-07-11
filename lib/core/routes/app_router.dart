@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -12,14 +13,21 @@ import 'founder_shell_route.dart';
 import 'student_shell_route.dart';
 
 final appRouterProvider = Provider<GoRouter>((ref) {
-  final authState = ref.watch(authStateChangesProvider);
-  final userModelState = ref.watch(currentUserModelProvider);
+  final refresh = ValueNotifier<int>(0);
+  ref.onDispose(refresh.dispose);
+
+  // Only re-run redirect() on auth/role changes — must not ref.watch() these,
+  // or any users/{uid} write (e.g. saving the profile form) would rebuild a
+  // brand-new GoRouter and reset navigation back to initialLocation.
+  ref.listen(authStateChangesProvider, (_, _) => refresh.value++);
+  ref.listen(currentUserModelProvider, (_, _) => refresh.value++);
 
   return GoRouter(
     initialLocation: '/',
+    refreshListenable: refresh,
     redirect: (context, state) => computeAuthRedirect(
-      authState: authState,
-      userModelState: userModelState,
+      authState: ref.read(authStateChangesProvider),
+      userModelState: ref.read(currentUserModelProvider),
       matchedLocation: state.matchedLocation,
     ),
     routes: [
