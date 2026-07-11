@@ -9,14 +9,15 @@
       "dependencies": [
         "cached_network_image",
         "cloud_firestore",
+        "cloudinary_public",
         "cupertino_icons",
         "device_preview",
         "file_picker",
         "firebase_auth",
         "firebase_core",
         "firebase_messaging",
-        "firebase_storage",
         "flutter",
+        "flutter_dotenv",
         "flutter_riverpod",
         "flutter_svg",
         "freezed_annotation",
@@ -265,6 +266,21 @@
       ]
     },
     {
+      "name": "flutter_dotenv",
+      "version": "5.2.1",
+      "dependencies": [
+        "flutter"
+      ]
+    },
+    {
+      "name": "cloudinary_public",
+      "version": "0.23.1",
+      "dependencies": [
+        "dio",
+        "flutter"
+      ]
+    },
+    {
       "name": "firebase_messaging",
       "version": "15.2.10",
       "dependencies": [
@@ -274,17 +290,6 @@
         "firebase_messaging_web",
         "flutter",
         "meta"
-      ]
-    },
-    {
-      "name": "firebase_storage",
-      "version": "12.4.10",
-      "dependencies": [
-        "firebase_core",
-        "firebase_core_platform_interface",
-        "firebase_storage_platform_interface",
-        "firebase_storage_web",
-        "flutter"
       ]
     },
     {
@@ -1039,6 +1044,19 @@
       ]
     },
     {
+      "name": "dio",
+      "version": "5.10.0",
+      "dependencies": [
+        "async",
+        "collection",
+        "dio_web_adapter",
+        "http_parser",
+        "meta",
+        "mime",
+        "path"
+      ]
+    },
+    {
       "name": "firebase_messaging_web",
       "version": "3.10.10",
       "dependencies": [
@@ -1070,34 +1088,6 @@
         "collection",
         "flutter",
         "flutter_test",
-        "meta",
-        "plugin_platform_interface"
-      ]
-    },
-    {
-      "name": "firebase_storage_web",
-      "version": "3.10.17",
-      "dependencies": [
-        "_flutterfire_internals",
-        "async",
-        "firebase_core",
-        "firebase_core_web",
-        "firebase_storage_platform_interface",
-        "flutter",
-        "flutter_web_plugins",
-        "http",
-        "meta",
-        "web"
-      ]
-    },
-    {
-      "name": "firebase_storage_platform_interface",
-      "version": "5.2.10",
-      "dependencies": [
-        "_flutterfire_internals",
-        "collection",
-        "firebase_core",
-        "flutter",
         "meta",
         "plugin_platform_interface"
       ]
@@ -1529,6 +1519,16 @@
         "jni",
         "jni_flutter",
         "path_provider_platform_interface"
+      ]
+    },
+    {
+      "name": "dio_web_adapter",
+      "version": "2.2.0",
+      "dependencies": [
+        "dio",
+        "http_parser",
+        "meta",
+        "web"
       ]
     },
     {

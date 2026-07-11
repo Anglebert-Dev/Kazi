@@ -146,6 +146,12 @@
       "languageVersion": "3.4"
     },
     {
+      "name": "cloudinary_public",
+      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/cloudinary_public-0.23.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.15"
+    },
+    {
       "name": "code_assets",
       "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/code_assets-1.2.1",
       "packageUri": "lib/",
@@ -214,6 +220,18 @@
     {
       "name": "device_preview",
       "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/device_preview-1.2.0",
+      "packageUri": "lib/",
+      "languageVersion": "3.3"
+    },
+    {
+      "name": "dio",
+      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/dio-5.10.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.18"
+    },
+    {
+      "name": "dio_web_adapter",
+      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/dio_web_adapter-2.2.0",
       "packageUri": "lib/",
       "languageVersion": "3.3"
     },
@@ -320,24 +338,6 @@
       "languageVersion": "3.4"
     },
     {
-      "name": "firebase_storage",
-      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/firebase_storage-12.4.10",
-      "packageUri": "lib/",
-      "languageVersion": "3.2"
-    },
-    {
-      "name": "firebase_storage_platform_interface",
-      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/firebase_storage_platform_interface-5.2.10",
-      "packageUri": "lib/",
-      "languageVersion": "3.2"
-    },
-    {
-      "name": "firebase_storage_web",
-      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/firebase_storage_web-3.10.17",
-      "packageUri": "lib/",
-      "languageVersion": "3.4"
-    },
-    {
       "name": "fixnum",
       "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/fixnum-1.1.1",
       "packageUri": "lib/",
@@ -354,6 +354,12 @@
       "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/flutter_cache_manager-3.4.1",
       "packageUri": "lib/",
       "languageVersion": "3.0"
+    },
+    {
+      "name": "flutter_dotenv",
+      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/flutter_dotenv-5.2.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.12"
     },
     {
       "name": "flutter_lints",

@@ -1,4 +1,20 @@
-
 # FVM Version Cache
 .fvm/
-INSTRUCTIONS.txt
+
+# Secrets
+.env
+
+# Flutter/Dart
+.dart_tool/
+.packages
+build/
+.flutter-plugins
+.flutter-plugins-dependencies
+.metadata
+
+# IDE
+.idea/
+*.iml
+
+# macOS
+.DS_Store
