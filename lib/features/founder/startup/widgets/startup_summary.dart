@@ -5,7 +5,9 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/index.dart';
 import '../../../student/profile/widgets/profile_info_row.dart';
 import '../../../student/profile/widgets/profile_link_tile.dart';
+import '../models/hiring_status.dart';
 import '../models/startup.dart';
+import '../models/startup_stage.dart';
 import 'verification_badge.dart';
 
 class StartupSummary extends StatelessWidget {
