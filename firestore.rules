@@ -22,7 +22,17 @@ service cloud.firestore {
     match /users/{userId} {
       allow read: if isSignedIn();
       allow create: if isOwner(userId);
-      allow update: if isOwner(userId) || isAdmin();
+      // Owners may edit their own profile fields and set their role exactly
+      // once during onboarding (null -> student/founder), but can't touch
+      // their own status (suspend/reactivate) or self-promote to admin —
+      // only an admin can do either.
+      allow update: if isSignedIn() && (
+        (isOwner(userId) &&
+          request.resource.data.status == resource.data.status &&
+          (request.resource.data.role == resource.data.role ||
+            (resource.data.role == null && request.resource.data.role in ['student', 'founder']))
+        ) || isAdmin()
+      );
       allow delete: if isAdmin();
     }
 
@@ -30,7 +40,7 @@ service cloud.firestore {
       allow read: if isSignedIn();
       allow create: if isSignedIn() && request.resource.data.founderId == request.auth.uid;
       allow update: if isSignedIn() && (resource.data.founderId == request.auth.uid || isAdmin());
-      allow delete: if isAdmin();
+      allow delete: if isSignedIn() && (resource.data.founderId == request.auth.uid || isAdmin());
     }
 
     match /opportunities/{opportunityId} {

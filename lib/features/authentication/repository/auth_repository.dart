@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 
+import '../models/user_mapper.dart';
 import '../models/user_model.dart';
 import '../models/user_role.dart';
+import '../models/user_status.dart';
 
 class AuthRepository {
   AuthRepository(this._auth, this._firestore);
@@ -31,6 +33,7 @@ class AuthRepository {
       'email': email,
       'displayName': displayName,
       'role': null,
+      'status': UserStatus.active.name,
       'createdAt': FieldValue.serverTimestamp(),
     });
   }
@@ -46,7 +49,7 @@ class AuthRepository {
   Future<UserModel?> fetchUserModel(String uid) async {
     final doc = await _firestore.collection('users').doc(uid).get();
     if (!doc.exists) return null;
-    return _userModelFromDoc(doc);
+    return userModelFromDoc(uid, doc.data()!);
   }
 
   Stream<UserModel?> watchUserModel(String uid) {
@@ -54,11 +57,15 @@ class AuthRepository {
         .collection('users')
         .doc(uid)
         .snapshots()
-        .map((doc) => doc.exists ? _userModelFromDoc(doc) : null);
+        .map((doc) => doc.exists ? userModelFromDoc(uid, doc.data()!) : null);
   }
 
   Future<void> updateUserRole(String uid, UserRole role) {
     return _firestore.collection('users').doc(uid).update({'role': role.name});
+  }
+
+  Future<void> updateUserStatus(String uid, UserStatus status) {
+    return _firestore.collection('users').doc(uid).update({'status': status.name});
   }
 
   Future<void> updateDisplayName(String uid, String displayName) async {
@@ -77,18 +84,5 @@ class AuthRepository {
     );
     await user.reauthenticateWithCredential(credential);
     await user.updatePassword(newPassword);
-  }
-
-  UserModel _userModelFromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {
-    final data = doc.data()!;
-    return UserModel(
-      uid: doc.id,
-      email: data['email'] as String,
-      displayName: data['displayName'] as String?,
-      role: data['role'] != null
-          ? UserRole.values.byName(data['role'] as String)
-          : null,
-      createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
-    );
   }
 }

@@ -21,6 +21,7 @@ mixin _$UserModel {
   String get email => throw _privateConstructorUsedError;
   String? get displayName => throw _privateConstructorUsedError;
   UserRole? get role => throw _privateConstructorUsedError;
+  UserStatus get status => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   /// Create a copy of UserModel
@@ -40,6 +41,7 @@ abstract class $UserModelCopyWith<$Res> {
     String email,
     String? displayName,
     UserRole? role,
+    UserStatus status,
     DateTime createdAt,
   });
 }
@@ -63,6 +65,7 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
     Object? email = null,
     Object? displayName = freezed,
     Object? role = freezed,
+    Object? status = null,
     Object? createdAt = null,
   }) {
     return _then(
@@ -83,6 +86,10 @@ class _$UserModelCopyWithImpl<$Res, $Val extends UserModel>
                 ? _value.role
                 : role // ignore: cast_nullable_to_non_nullable
                       as UserRole?,
+            status: null == status
+                ? _value.status
+                : status // ignore: cast_nullable_to_non_nullable
+                      as UserStatus,
             createdAt: null == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
@@ -107,6 +114,7 @@ abstract class _$$UserModelImplCopyWith<$Res>
     String email,
     String? displayName,
     UserRole? role,
+    UserStatus status,
     DateTime createdAt,
   });
 }
@@ -129,6 +137,7 @@ class __$$UserModelImplCopyWithImpl<$Res>
     Object? email = null,
     Object? displayName = freezed,
     Object? role = freezed,
+    Object? status = null,
     Object? createdAt = null,
   }) {
     return _then(
@@ -149,6 +158,10 @@ class __$$UserModelImplCopyWithImpl<$Res>
             ? _value.role
             : role // ignore: cast_nullable_to_non_nullable
                   as UserRole?,
+        status: null == status
+            ? _value.status
+            : status // ignore: cast_nullable_to_non_nullable
+                  as UserStatus,
         createdAt: null == createdAt
             ? _value.createdAt
             : createdAt // ignore: cast_nullable_to_non_nullable
@@ -166,6 +179,7 @@ class _$UserModelImpl implements _UserModel {
     required this.email,
     this.displayName,
     this.role,
+    this.status = UserStatus.active,
     required this.createdAt,
   });
 
@@ -178,11 +192,14 @@ class _$UserModelImpl implements _UserModel {
   @override
   final UserRole? role;
   @override
+  @JsonKey()
+  final UserStatus status;
+  @override
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'UserModel(uid: $uid, email: $email, displayName: $displayName, role: $role, createdAt: $createdAt)';
+    return 'UserModel(uid: $uid, email: $email, displayName: $displayName, role: $role, status: $status, createdAt: $createdAt)';
   }
 
   @override
@@ -195,13 +212,21 @@ class _$UserModelImpl implements _UserModel {
             (identical(other.displayName, displayName) ||
                 other.displayName == displayName) &&
             (identical(other.role, role) || other.role == role) &&
+            (identical(other.status, status) || other.status == status) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
 
   @override
-  int get hashCode =>
-      Object.hash(runtimeType, uid, email, displayName, role, createdAt);
+  int get hashCode => Object.hash(
+    runtimeType,
+    uid,
+    email,
+    displayName,
+    role,
+    status,
+    createdAt,
+  );
 
   /// Create a copy of UserModel
   /// with the given fields replaced by the non-null parameter values.
@@ -218,6 +243,7 @@ abstract class _UserModel implements UserModel {
     required final String email,
     final String? displayName,
     final UserRole? role,
+    final UserStatus status,
     required final DateTime createdAt,
   }) = _$UserModelImpl;
 
@@ -229,6 +255,8 @@ abstract class _UserModel implements UserModel {
   String? get displayName;
   @override
   UserRole? get role;
+  @override
+  UserStatus get status;
   @override
   DateTime get createdAt;
 

@@ -4,6 +4,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter_dotenv/flutter_dotenv.dart';
 
 import '../../features/authentication/models/user_role.dart';
+import '../../features/authentication/models/user_status.dart';
 
 Future<void> ensureAdminAccountExists() async {
   final auth = FirebaseAuth.instance;
@@ -28,6 +29,7 @@ Future<void> ensureAdminAccountExists() async {
       'email': email,
       'displayName': name,
       'role': UserRole.admin.name,
+      'status': UserStatus.active.name,
       'createdAt': FieldValue.serverTimestamp(),
     });
     debugPrint('[admin bootstrap] created admin account for $email');

@@ -47,4 +47,11 @@ class StartupController extends _$StartupController {
       () => ref.read(startupRepositoryProvider).submitForReview(founderId),
     );
   }
+
+  Future<void> deleteStartup(String founderId) async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(
+      () => ref.read(startupRepositoryProvider).deleteStartup(founderId),
+    );
+  }
 }

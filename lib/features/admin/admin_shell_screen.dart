@@ -9,7 +9,10 @@ class AdminShellScreen extends StatelessWidget {
   final StatefulNavigationShell navigationShell;
 
   static const _items = [
+    AppBottomNavItem(icon: Icons.dashboard_outlined, label: 'Dashboard'),
     AppBottomNavItem(icon: Icons.verified_user_outlined, label: 'Startups'),
+    AppBottomNavItem(icon: Icons.work_outline, label: 'Opportunities'),
+    AppBottomNavItem(icon: Icons.people_outline, label: 'Users'),
     AppBottomNavItem(icon: Icons.category_outlined, label: 'Categories'),
   ];
 

@@ -7,6 +7,7 @@ import '../../../student/profile/widgets/profile_info_row.dart';
 import '../../../student/profile/widgets/profile_link_tile.dart';
 import '../models/hiring_status.dart';
 import '../models/startup.dart';
+import 'delete_startup_button.dart';
 import 'verification_badge.dart';
 import 'verification_submission_section.dart';
 
@@ -72,6 +73,8 @@ class StartupSummary extends StatelessWidget {
           VerificationSubmissionSection(startup: startup),
           const SizedBox(height: AppSpacing.lg),
           AppButton(label: 'Edit startup', icon: Icons.edit, onPressed: onEdit, fullWidth: true),
+          const SizedBox(height: AppSpacing.sm),
+          DeleteStartupButton(founderId: startup.founderId),
         ],
       ),
     );

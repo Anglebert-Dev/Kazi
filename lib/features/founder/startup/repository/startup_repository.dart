@@ -55,4 +55,8 @@ class StartupRepository {
       'verificationRejectionReason': null,
     });
   }
+
+  Future<void> deleteStartup(String founderId) {
+    return _firestore.collection('startups').doc(founderId).delete();
+  }
 }

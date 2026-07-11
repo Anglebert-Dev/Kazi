@@ -8,6 +8,7 @@ import '../../features/authentication/screens/login_screen.dart';
 import '../../features/authentication/screens/register_screen.dart';
 import '../../features/onboarding/screens/onboarding_role_screen.dart';
 import '../../features/shared/splash_screen.dart';
+import '../../features/shared/suspended_screen.dart';
 import 'admin_shell_route.dart';
 import 'auth_redirect.dart';
 import 'founder_shell_route.dart';
@@ -42,6 +43,10 @@ final appRouterProvider = Provider<GoRouter>((ref) {
       GoRoute(
         path: '/onboarding',
         builder: (context, state) => const OnboardingRoleScreen(),
+      ),
+      GoRoute(
+        path: '/suspended',
+        builder: (context, state) => const SuspendedScreen(),
       ),
       studentShellRoute,
       founderShellRoute,

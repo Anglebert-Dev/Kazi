@@ -3,14 +3,16 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../features/authentication/models/user_model.dart';
 import '../../features/authentication/models/user_role.dart';
+import '../../features/authentication/models/user_status.dart';
 
 const authRoutes = {'/login', '/register', '/forgot-password'};
 const onboardingRoute = '/onboarding';
+const suspendedRoute = '/suspended';
 
 String _homeLocationFor(UserRole? role) {
   return switch (role) {
     UserRole.founder => '/founder/dashboard',
-    UserRole.admin => '/admin/startups',
+    UserRole.admin => '/admin/dashboard',
     _ => '/student/home',
   };
 }
@@ -31,8 +33,17 @@ String? computeAuthRedirect({
 
   if (userModelState.isLoading) return null;
 
-  final role = userModelState.valueOrNull?.role;
+  final userModel = userModelState.valueOrNull;
+  final role = userModel?.role;
   final isOnboarding = matchedLocation == onboardingRoute;
+  final isSuspended = matchedLocation == suspendedRoute;
+
+  if (userModel?.status == UserStatus.suspended) {
+    return isSuspended ? null : suspendedRoute;
+  }
+  if (isSuspended) {
+    return role == null ? onboardingRoute : _homeLocationFor(role);
+  }
 
   if (isAuthRoute) {
     return role == null ? onboardingRoute : _homeLocationFor(role);
