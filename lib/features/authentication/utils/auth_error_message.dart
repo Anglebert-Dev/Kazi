@@ -13,6 +13,7 @@ String authErrorMessage(Object error) {
     'email-already-in-use' => 'An account already exists with that email.',
     'weak-password' => 'Choose a stronger password (at least 6 characters).',
     'too-many-requests' => 'Too many attempts. Try again later.',
+    'requires-recent-login' => 'Please log out and log back in, then try again.',
     _ => 'Something went wrong. Please try again.',
   };
 }

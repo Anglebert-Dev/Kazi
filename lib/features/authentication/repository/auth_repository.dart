@@ -16,15 +16,20 @@ class AuthRepository {
     return _auth.signInWithEmailAndPassword(email: email, password: password);
   }
 
-  Future<void> signUp({required String email, required String password}) async {
+  Future<void> signUp({
+    required String email,
+    required String password,
+    required String displayName,
+  }) async {
     final credential = await _auth.createUserWithEmailAndPassword(
       email: email,
       password: password,
     );
+    await credential.user!.updateDisplayName(displayName);
 
     await _firestore.collection('users').doc(credential.user!.uid).set({
       'email': email,
-      'displayName': null,
+      'displayName': displayName,
       'role': null,
       'createdAt': FieldValue.serverTimestamp(),
     });
@@ -54,6 +59,24 @@ class AuthRepository {
 
   Future<void> updateUserRole(String uid, UserRole role) {
     return _firestore.collection('users').doc(uid).update({'role': role.name});
+  }
+
+  Future<void> updateDisplayName(String uid, String displayName) async {
+    await _auth.currentUser?.updateDisplayName(displayName);
+    await _firestore.collection('users').doc(uid).update({'displayName': displayName});
+  }
+
+  Future<void> updatePassword({
+    required String currentPassword,
+    required String newPassword,
+  }) async {
+    final user = _auth.currentUser!;
+    final credential = EmailAuthProvider.credential(
+      email: user.email!,
+      password: currentPassword,
+    );
+    await user.reauthenticateWithCredential(credential);
+    await user.updatePassword(newPassword);
   }
 
   UserModel _userModelFromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {

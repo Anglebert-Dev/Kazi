@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../authentication/providers/auth_controller.dart';
+import '../../../settings/screens/settings_screen.dart';
 import '../providers/student_profile_providers.dart';
 import '../widgets/student_profile_form.dart';
 import '../widgets/student_profile_summary.dart';
@@ -38,8 +38,10 @@ class _StudentProfileScreenState extends ConsumerState<StudentProfileScreen> {
             : null,
         actions: [
           IconButton(
-            icon: const Icon(Icons.logout),
-            onPressed: () => ref.read(authControllerProvider.notifier).signOut(),
+            icon: const Icon(Icons.settings_outlined),
+            onPressed: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (context) => const SettingsScreen())),
           ),
         ],
       ),
