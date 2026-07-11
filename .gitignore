@@ -1,6 +1,8 @@
 # FVM Version Cache
 .fvm/
 
+INSTRUCTIONS.txt
+
 # Secrets
 .env
 
@@ -18,3 +20,5 @@ build/
 
 # macOS
 .DS_Store
+
+
