@@ -8,7 +8,11 @@ const authRoutes = {'/login', '/register', '/forgot-password'};
 const onboardingRoute = '/onboarding';
 
 String _homeLocationFor(UserRole? role) {
-  return role == UserRole.founder ? '/founder/dashboard' : '/student/home';
+  return switch (role) {
+    UserRole.founder => '/founder/dashboard',
+    UserRole.admin => '/admin/startups',
+    _ => '/student/home',
+  };
 }
 
 String? computeAuthRedirect({
@@ -42,9 +46,11 @@ String? computeAuthRedirect({
 
   final isStudentRoute = matchedLocation.startsWith('/student');
   final isFounderRoute = matchedLocation.startsWith('/founder');
+  final isAdminRoute = matchedLocation.startsWith('/admin');
 
-  if (role == UserRole.student && isFounderRoute) return _homeLocationFor(role);
-  if (role == UserRole.founder && isStudentRoute) return _homeLocationFor(role);
+  if (role != UserRole.student && isStudentRoute) return _homeLocationFor(role);
+  if (role != UserRole.founder && isFounderRoute) return _homeLocationFor(role);
+  if (role != UserRole.admin && isAdminRoute) return _homeLocationFor(role);
   if (matchedLocation == '/') return _homeLocationFor(role);
 
   return null;

@@ -1,26 +1,27 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'startup_controller.dart';
+part of 'admin_startup_controller.dart';
 
 // **************************************************************************
 // RiverpodGenerator
 // **************************************************************************
 
-String _$startupControllerHash() => r'873ea72370424ba98515283f120e807c227af673';
+String _$adminStartupControllerHash() =>
+    r'73a8740de5a7c386442a79021d9371f088991cf3';
 
-/// See also [StartupController].
-@ProviderFor(StartupController)
-final startupControllerProvider =
-    AutoDisposeAsyncNotifierProvider<StartupController, void>.internal(
-      StartupController.new,
-      name: r'startupControllerProvider',
+/// See also [AdminStartupController].
+@ProviderFor(AdminStartupController)
+final adminStartupControllerProvider =
+    AutoDisposeAsyncNotifierProvider<AdminStartupController, void>.internal(
+      AdminStartupController.new,
+      name: r'adminStartupControllerProvider',
       debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
           ? null
-          : _$startupControllerHash,
+          : _$adminStartupControllerHash,
       dependencies: null,
       allTransitiveDependencies: null,
     );
 
-typedef _$StartupController = AutoDisposeAsyncNotifier<void>;
+typedef _$AdminStartupController = AutoDisposeAsyncNotifier<void>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

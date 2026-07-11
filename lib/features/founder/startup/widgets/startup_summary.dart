@@ -9,6 +9,7 @@ import '../models/hiring_status.dart';
 import '../models/startup.dart';
 import '../models/startup_stage.dart';
 import 'verification_badge.dart';
+import 'verification_submission_section.dart';
 
 class StartupSummary extends StatelessWidget {
   const StartupSummary({super.key, required this.startup, required this.onEdit});
@@ -67,6 +68,8 @@ class StartupSummary extends StatelessWidget {
             actionLabel: 'Visit website',
             url: startup.website,
           ),
+          const SizedBox(height: AppSpacing.lg),
+          VerificationSubmissionSection(startup: startup),
           const SizedBox(height: AppSpacing.lg),
           AppButton(label: 'Edit startup', icon: Icons.edit, onPressed: onEdit, fullWidth: true),
         ],

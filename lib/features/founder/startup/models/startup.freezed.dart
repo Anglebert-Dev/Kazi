@@ -27,6 +27,8 @@ mixin _$Startup {
   HiringStatus get hiringStatus => throw _privateConstructorUsedError;
   VerificationStatus get verificationStatus =>
       throw _privateConstructorUsedError;
+  String? get verificationDocUrl => throw _privateConstructorUsedError;
+  String? get verificationRejectionReason => throw _privateConstructorUsedError;
 
   /// Create a copy of Startup
   /// with the given fields replaced by the non-null parameter values.
@@ -49,6 +51,8 @@ abstract class $StartupCopyWith<$Res> {
     StartupStage stage,
     HiringStatus hiringStatus,
     VerificationStatus verificationStatus,
+    String? verificationDocUrl,
+    String? verificationRejectionReason,
   });
 }
 
@@ -76,6 +80,8 @@ class _$StartupCopyWithImpl<$Res, $Val extends Startup>
     Object? stage = null,
     Object? hiringStatus = null,
     Object? verificationStatus = null,
+    Object? verificationDocUrl = freezed,
+    Object? verificationRejectionReason = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -115,6 +121,14 @@ class _$StartupCopyWithImpl<$Res, $Val extends Startup>
                 ? _value.verificationStatus
                 : verificationStatus // ignore: cast_nullable_to_non_nullable
                       as VerificationStatus,
+            verificationDocUrl: freezed == verificationDocUrl
+                ? _value.verificationDocUrl
+                : verificationDocUrl // ignore: cast_nullable_to_non_nullable
+                      as String?,
+            verificationRejectionReason: freezed == verificationRejectionReason
+                ? _value.verificationRejectionReason
+                : verificationRejectionReason // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -139,6 +153,8 @@ abstract class _$$StartupImplCopyWith<$Res> implements $StartupCopyWith<$Res> {
     StartupStage stage,
     HiringStatus hiringStatus,
     VerificationStatus verificationStatus,
+    String? verificationDocUrl,
+    String? verificationRejectionReason,
   });
 }
 
@@ -165,6 +181,8 @@ class __$$StartupImplCopyWithImpl<$Res>
     Object? stage = null,
     Object? hiringStatus = null,
     Object? verificationStatus = null,
+    Object? verificationDocUrl = freezed,
+    Object? verificationRejectionReason = freezed,
   }) {
     return _then(
       _$StartupImpl(
@@ -204,6 +222,14 @@ class __$$StartupImplCopyWithImpl<$Res>
             ? _value.verificationStatus
             : verificationStatus // ignore: cast_nullable_to_non_nullable
                   as VerificationStatus,
+        verificationDocUrl: freezed == verificationDocUrl
+            ? _value.verificationDocUrl
+            : verificationDocUrl // ignore: cast_nullable_to_non_nullable
+                  as String?,
+        verificationRejectionReason: freezed == verificationRejectionReason
+            ? _value.verificationRejectionReason
+            : verificationRejectionReason // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -222,6 +248,8 @@ class _$StartupImpl implements _Startup {
     this.stage = StartupStage.idea,
     this.hiringStatus = HiringStatus.notHiring,
     this.verificationStatus = VerificationStatus.unverified,
+    this.verificationDocUrl,
+    this.verificationRejectionReason,
   });
 
   @override
@@ -245,10 +273,14 @@ class _$StartupImpl implements _Startup {
   @override
   @JsonKey()
   final VerificationStatus verificationStatus;
+  @override
+  final String? verificationDocUrl;
+  @override
+  final String? verificationRejectionReason;
 
   @override
   String toString() {
-    return 'Startup(founderId: $founderId, logoUrl: $logoUrl, name: $name, industry: $industry, description: $description, website: $website, stage: $stage, hiringStatus: $hiringStatus, verificationStatus: $verificationStatus)';
+    return 'Startup(founderId: $founderId, logoUrl: $logoUrl, name: $name, industry: $industry, description: $description, website: $website, stage: $stage, hiringStatus: $hiringStatus, verificationStatus: $verificationStatus, verificationDocUrl: $verificationDocUrl, verificationRejectionReason: $verificationRejectionReason)';
   }
 
   @override
@@ -269,7 +301,15 @@ class _$StartupImpl implements _Startup {
             (identical(other.hiringStatus, hiringStatus) ||
                 other.hiringStatus == hiringStatus) &&
             (identical(other.verificationStatus, verificationStatus) ||
-                other.verificationStatus == verificationStatus));
+                other.verificationStatus == verificationStatus) &&
+            (identical(other.verificationDocUrl, verificationDocUrl) ||
+                other.verificationDocUrl == verificationDocUrl) &&
+            (identical(
+                  other.verificationRejectionReason,
+                  verificationRejectionReason,
+                ) ||
+                other.verificationRejectionReason ==
+                    verificationRejectionReason));
   }
 
   @override
@@ -284,6 +324,8 @@ class _$StartupImpl implements _Startup {
     stage,
     hiringStatus,
     verificationStatus,
+    verificationDocUrl,
+    verificationRejectionReason,
   );
 
   /// Create a copy of Startup
@@ -306,6 +348,8 @@ abstract class _Startup implements Startup {
     final StartupStage stage,
     final HiringStatus hiringStatus,
     final VerificationStatus verificationStatus,
+    final String? verificationDocUrl,
+    final String? verificationRejectionReason,
   }) = _$StartupImpl;
 
   @override
@@ -326,6 +370,10 @@ abstract class _Startup implements Startup {
   HiringStatus get hiringStatus;
   @override
   VerificationStatus get verificationStatus;
+  @override
+  String? get verificationDocUrl;
+  @override
+  String? get verificationRejectionReason;
 
   /// Create a copy of Startup
   /// with the given fields replaced by the non-null parameter values.

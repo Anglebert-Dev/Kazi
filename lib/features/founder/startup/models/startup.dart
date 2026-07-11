@@ -18,5 +18,7 @@ class Startup with _$Startup {
     @Default(StartupStage.idea) StartupStage stage,
     @Default(HiringStatus.notHiring) HiringStatus hiringStatus,
     @Default(VerificationStatus.unverified) VerificationStatus verificationStatus,
+    String? verificationDocUrl,
+    String? verificationRejectionReason,
   }) = _Startup;
 }
