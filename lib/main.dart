@@ -1,3 +1,5 @@
+import 'package:device_preview/device_preview.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -5,7 +7,12 @@ import 'core/routes/app_router.dart';
 import 'core/theme/app_theme.dart';
 
 void main() {
-  runApp(const ProviderScope(child: KaziApp()));
+  runApp(
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const ProviderScope(child: KaziApp()),
+    ),
+  );
 }
 
 class KaziApp extends ConsumerWidget {
@@ -20,6 +27,8 @@ class KaziApp extends ConsumerWidget {
       debugShowCheckedModeBanner: false,
       theme: AppTheme.light,
       routerConfig: router,
+      locale: DevicePreview.locale(context),
+      builder: DevicePreview.appBuilder,
     );
   }
 }
