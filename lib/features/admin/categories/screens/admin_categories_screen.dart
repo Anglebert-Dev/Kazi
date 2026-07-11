@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../settings/screens/settings_screen.dart';
 import '../models/category_type.dart';
 import '../providers/category_controller.dart';
 import '../widgets/category_form_dialog.dart';
@@ -36,6 +37,14 @@ class _AdminCategoriesScreenState extends ConsumerState<AdminCategoriesScreen>
     return Scaffold(
       appBar: AppBar(
         title: const Text('Categories'),
+        actions: [
+          IconButton(
+            icon: const Icon(Icons.settings_outlined),
+            onPressed: () => Navigator.of(
+              context,
+            ).push(MaterialPageRoute(builder: (context) => const SettingsScreen())),
+          ),
+        ],
         bottom: TabBar(
           controller: _tabController,
           isScrollable: true,
