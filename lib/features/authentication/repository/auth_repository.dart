@@ -36,10 +36,24 @@ class AuthRepository {
     return _auth.sendPasswordResetEmail(email: email);
   }
 
+  String? get currentUserId => _auth.currentUser?.uid;
+
   Future<UserModel?> fetchUserModel(String uid) async {
     final doc = await _firestore.collection('users').doc(uid).get();
     if (!doc.exists) return null;
     return _userModelFromDoc(doc);
+  }
+
+  Stream<UserModel?> watchUserModel(String uid) {
+    return _firestore
+        .collection('users')
+        .doc(uid)
+        .snapshots()
+        .map((doc) => doc.exists ? _userModelFromDoc(doc) : null);
+  }
+
+  Future<void> updateUserRole(String uid, UserRole role) {
+    return _firestore.collection('users').doc(uid).update({'role': role.name});
   }
 
   UserModel _userModelFromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {

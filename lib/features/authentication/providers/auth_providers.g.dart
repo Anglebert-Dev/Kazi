@@ -40,5 +40,22 @@ final authStateChangesProvider = AutoDisposeStreamProvider<User?>.internal(
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef AuthStateChangesRef = AutoDisposeStreamProviderRef<User?>;
+String _$currentUserModelHash() => r'ee6e531a32bf0197b1bda84e1771d58f48b07cc0';
+
+/// See also [currentUserModel].
+@ProviderFor(currentUserModel)
+final currentUserModelProvider = AutoDisposeStreamProvider<UserModel?>.internal(
+  currentUserModel,
+  name: r'currentUserModelProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$currentUserModelHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef CurrentUserModelRef = AutoDisposeStreamProviderRef<UserModel?>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package
