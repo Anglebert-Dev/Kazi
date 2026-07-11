@@ -1,4 +1,4 @@
-import 'package:file_picker/file_picker.dart';
+import 'package:file_selector/file_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:image_picker/image_picker.dart';
@@ -78,23 +78,28 @@ class _StudentProfileFormState extends ConsumerState<StudentProfileForm> {
 
   Future<void> _pickCv() async {
     debugPrint('[CV upload] opening file picker');
-    final result = await FilePicker.platform.pickFiles(
-      type: FileType.custom,
-      allowedExtensions: ['pdf'],
+    final file = await openFile(
+      acceptedTypeGroups: const [
+        XTypeGroup(
+          label: 'PDF',
+          extensions: ['pdf'],
+          mimeTypes: ['application/pdf'],
+          webWildCards: ['application/pdf'],
+        ),
+      ],
     );
-    final path = result?.files.single.path;
-    if (path == null) {
-      debugPrint('[CV upload] no file selected (path was null)');
+    if (file == null) {
+      debugPrint('[CV upload] no file selected');
       return;
     }
 
-    debugPrint('[CV upload] selected file: $path');
+    debugPrint('[CV upload] selected file: ${file.name}');
     setState(() {
       _isUploadingCv = true;
       _cvUploadFailed = false;
     });
 
-    final url = await ref.read(studentProfileControllerProvider.notifier).uploadCv(path);
+    final url = await ref.read(studentProfileControllerProvider.notifier).uploadCv(file.path);
     if (!mounted) return;
 
     if (url != null) {

@@ -63,7 +63,7 @@ dependencies:
 
   # Media / files
   image_picker: ^1.1.2
-  file_picker: ^8.1.6
+  file_selector: ^1.0.3
 
   # Utils
   intl: ^0.20.2

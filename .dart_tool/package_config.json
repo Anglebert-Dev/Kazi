@@ -254,10 +254,22 @@
       "languageVersion": "3.0"
     },
     {
-      "name": "file_picker",
-      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/file_picker-8.3.7",
+      "name": "file_selector",
+      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/file_selector-1.1.0",
       "packageUri": "lib/",
-      "languageVersion": "3.4"
+      "languageVersion": "3.9"
+    },
+    {
+      "name": "file_selector_android",
+      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/file_selector_android-0.5.2+8",
+      "packageUri": "lib/",
+      "languageVersion": "3.12"
+    },
+    {
+      "name": "file_selector_ios",
+      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/file_selector_ios-0.5.3+5",
+      "packageUri": "lib/",
+      "languageVersion": "3.10"
     },
     {
       "name": "file_selector_linux",
@@ -276,6 +288,12 @@
       "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/file_selector_platform_interface-2.7.0",
       "packageUri": "lib/",
       "languageVersion": "3.7"
+    },
+    {
+      "name": "file_selector_web",
+      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/file_selector_web-0.9.5",
+      "packageUri": "lib/",
+      "languageVersion": "3.10"
     },
     {
       "name": "file_selector_windows",
@@ -1038,12 +1056,6 @@
       "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/web_socket_channel-3.0.3",
       "packageUri": "lib/",
       "languageVersion": "3.3"
-    },
-    {
-      "name": "win32",
-      "rootUri": "file:///Users/makaveli/.pub-cache/hosted/pub.dev/win32-5.15.0",
-      "packageUri": "lib/",
-      "languageVersion": "3.8"
     },
     {
       "name": "xdg_directories",
