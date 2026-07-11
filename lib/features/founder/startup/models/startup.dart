@@ -1,7 +1,6 @@
 import 'package:freezed_annotation/freezed_annotation.dart';
 
 import 'hiring_status.dart';
-import 'startup_stage.dart';
 import 'verification_status.dart';
 
 part 'startup.freezed.dart';
@@ -15,10 +14,10 @@ class Startup with _$Startup {
     String? industry,
     String? description,
     String? website,
-    @Default(StartupStage.idea) StartupStage stage,
+    String? stage,
     @Default(HiringStatus.notHiring) HiringStatus hiringStatus,
     @Default(VerificationStatus.unverified) VerificationStatus verificationStatus,
-    String? verificationDocUrl,
+    @Default(<String, String>{}) Map<String, String> verificationDocUrls,
     String? verificationRejectionReason,
   }) = _Startup;
 }

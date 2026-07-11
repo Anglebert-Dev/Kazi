@@ -7,7 +7,6 @@ import '../../../student/profile/widgets/profile_info_row.dart';
 import '../../../student/profile/widgets/profile_link_tile.dart';
 import '../models/hiring_status.dart';
 import '../models/startup.dart';
-import '../models/startup_stage.dart';
 import 'verification_badge.dart';
 import 'verification_submission_section.dart';
 
@@ -59,7 +58,8 @@ class StartupSummary extends StatelessWidget {
           ],
           if ((startup.industry ?? '').isNotEmpty)
             ProfileInfoRow(label: 'Industry', value: startup.industry!),
-          ProfileInfoRow(label: 'Stage', value: startup.stage.label),
+          if ((startup.stage ?? '').isNotEmpty)
+            ProfileInfoRow(label: 'Stage', value: startup.stage!),
           const SizedBox(height: AppSpacing.md),
           const SectionHeader(title: 'Links'),
           ProfileLinkTile(

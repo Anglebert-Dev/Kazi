@@ -23,11 +23,12 @@ mixin _$Startup {
   String? get industry => throw _privateConstructorUsedError;
   String? get description => throw _privateConstructorUsedError;
   String? get website => throw _privateConstructorUsedError;
-  StartupStage get stage => throw _privateConstructorUsedError;
+  String? get stage => throw _privateConstructorUsedError;
   HiringStatus get hiringStatus => throw _privateConstructorUsedError;
   VerificationStatus get verificationStatus =>
       throw _privateConstructorUsedError;
-  String? get verificationDocUrl => throw _privateConstructorUsedError;
+  Map<String, String> get verificationDocUrls =>
+      throw _privateConstructorUsedError;
   String? get verificationRejectionReason => throw _privateConstructorUsedError;
 
   /// Create a copy of Startup
@@ -48,10 +49,10 @@ abstract class $StartupCopyWith<$Res> {
     String? industry,
     String? description,
     String? website,
-    StartupStage stage,
+    String? stage,
     HiringStatus hiringStatus,
     VerificationStatus verificationStatus,
-    String? verificationDocUrl,
+    Map<String, String> verificationDocUrls,
     String? verificationRejectionReason,
   });
 }
@@ -77,10 +78,10 @@ class _$StartupCopyWithImpl<$Res, $Val extends Startup>
     Object? industry = freezed,
     Object? description = freezed,
     Object? website = freezed,
-    Object? stage = null,
+    Object? stage = freezed,
     Object? hiringStatus = null,
     Object? verificationStatus = null,
-    Object? verificationDocUrl = freezed,
+    Object? verificationDocUrls = null,
     Object? verificationRejectionReason = freezed,
   }) {
     return _then(
@@ -109,10 +110,10 @@ class _$StartupCopyWithImpl<$Res, $Val extends Startup>
                 ? _value.website
                 : website // ignore: cast_nullable_to_non_nullable
                       as String?,
-            stage: null == stage
+            stage: freezed == stage
                 ? _value.stage
                 : stage // ignore: cast_nullable_to_non_nullable
-                      as StartupStage,
+                      as String?,
             hiringStatus: null == hiringStatus
                 ? _value.hiringStatus
                 : hiringStatus // ignore: cast_nullable_to_non_nullable
@@ -121,10 +122,10 @@ class _$StartupCopyWithImpl<$Res, $Val extends Startup>
                 ? _value.verificationStatus
                 : verificationStatus // ignore: cast_nullable_to_non_nullable
                       as VerificationStatus,
-            verificationDocUrl: freezed == verificationDocUrl
-                ? _value.verificationDocUrl
-                : verificationDocUrl // ignore: cast_nullable_to_non_nullable
-                      as String?,
+            verificationDocUrls: null == verificationDocUrls
+                ? _value.verificationDocUrls
+                : verificationDocUrls // ignore: cast_nullable_to_non_nullable
+                      as Map<String, String>,
             verificationRejectionReason: freezed == verificationRejectionReason
                 ? _value.verificationRejectionReason
                 : verificationRejectionReason // ignore: cast_nullable_to_non_nullable
@@ -150,10 +151,10 @@ abstract class _$$StartupImplCopyWith<$Res> implements $StartupCopyWith<$Res> {
     String? industry,
     String? description,
     String? website,
-    StartupStage stage,
+    String? stage,
     HiringStatus hiringStatus,
     VerificationStatus verificationStatus,
-    String? verificationDocUrl,
+    Map<String, String> verificationDocUrls,
     String? verificationRejectionReason,
   });
 }
@@ -178,10 +179,10 @@ class __$$StartupImplCopyWithImpl<$Res>
     Object? industry = freezed,
     Object? description = freezed,
     Object? website = freezed,
-    Object? stage = null,
+    Object? stage = freezed,
     Object? hiringStatus = null,
     Object? verificationStatus = null,
-    Object? verificationDocUrl = freezed,
+    Object? verificationDocUrls = null,
     Object? verificationRejectionReason = freezed,
   }) {
     return _then(
@@ -210,10 +211,10 @@ class __$$StartupImplCopyWithImpl<$Res>
             ? _value.website
             : website // ignore: cast_nullable_to_non_nullable
                   as String?,
-        stage: null == stage
+        stage: freezed == stage
             ? _value.stage
             : stage // ignore: cast_nullable_to_non_nullable
-                  as StartupStage,
+                  as String?,
         hiringStatus: null == hiringStatus
             ? _value.hiringStatus
             : hiringStatus // ignore: cast_nullable_to_non_nullable
@@ -222,10 +223,10 @@ class __$$StartupImplCopyWithImpl<$Res>
             ? _value.verificationStatus
             : verificationStatus // ignore: cast_nullable_to_non_nullable
                   as VerificationStatus,
-        verificationDocUrl: freezed == verificationDocUrl
-            ? _value.verificationDocUrl
-            : verificationDocUrl // ignore: cast_nullable_to_non_nullable
-                  as String?,
+        verificationDocUrls: null == verificationDocUrls
+            ? _value._verificationDocUrls
+            : verificationDocUrls // ignore: cast_nullable_to_non_nullable
+                  as Map<String, String>,
         verificationRejectionReason: freezed == verificationRejectionReason
             ? _value.verificationRejectionReason
             : verificationRejectionReason // ignore: cast_nullable_to_non_nullable
@@ -245,12 +246,12 @@ class _$StartupImpl implements _Startup {
     this.industry,
     this.description,
     this.website,
-    this.stage = StartupStage.idea,
+    this.stage,
     this.hiringStatus = HiringStatus.notHiring,
     this.verificationStatus = VerificationStatus.unverified,
-    this.verificationDocUrl,
+    final Map<String, String> verificationDocUrls = const <String, String>{},
     this.verificationRejectionReason,
-  });
+  }) : _verificationDocUrls = verificationDocUrls;
 
   @override
   final String founderId;
@@ -265,22 +266,29 @@ class _$StartupImpl implements _Startup {
   @override
   final String? website;
   @override
-  @JsonKey()
-  final StartupStage stage;
+  final String? stage;
   @override
   @JsonKey()
   final HiringStatus hiringStatus;
   @override
   @JsonKey()
   final VerificationStatus verificationStatus;
+  final Map<String, String> _verificationDocUrls;
   @override
-  final String? verificationDocUrl;
+  @JsonKey()
+  Map<String, String> get verificationDocUrls {
+    if (_verificationDocUrls is EqualUnmodifiableMapView)
+      return _verificationDocUrls;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableMapView(_verificationDocUrls);
+  }
+
   @override
   final String? verificationRejectionReason;
 
   @override
   String toString() {
-    return 'Startup(founderId: $founderId, logoUrl: $logoUrl, name: $name, industry: $industry, description: $description, website: $website, stage: $stage, hiringStatus: $hiringStatus, verificationStatus: $verificationStatus, verificationDocUrl: $verificationDocUrl, verificationRejectionReason: $verificationRejectionReason)';
+    return 'Startup(founderId: $founderId, logoUrl: $logoUrl, name: $name, industry: $industry, description: $description, website: $website, stage: $stage, hiringStatus: $hiringStatus, verificationStatus: $verificationStatus, verificationDocUrls: $verificationDocUrls, verificationRejectionReason: $verificationRejectionReason)';
   }
 
   @override
@@ -302,8 +310,10 @@ class _$StartupImpl implements _Startup {
                 other.hiringStatus == hiringStatus) &&
             (identical(other.verificationStatus, verificationStatus) ||
                 other.verificationStatus == verificationStatus) &&
-            (identical(other.verificationDocUrl, verificationDocUrl) ||
-                other.verificationDocUrl == verificationDocUrl) &&
+            const DeepCollectionEquality().equals(
+              other._verificationDocUrls,
+              _verificationDocUrls,
+            ) &&
             (identical(
                   other.verificationRejectionReason,
                   verificationRejectionReason,
@@ -324,7 +334,7 @@ class _$StartupImpl implements _Startup {
     stage,
     hiringStatus,
     verificationStatus,
-    verificationDocUrl,
+    const DeepCollectionEquality().hash(_verificationDocUrls),
     verificationRejectionReason,
   );
 
@@ -345,10 +355,10 @@ abstract class _Startup implements Startup {
     final String? industry,
     final String? description,
     final String? website,
-    final StartupStage stage,
+    final String? stage,
     final HiringStatus hiringStatus,
     final VerificationStatus verificationStatus,
-    final String? verificationDocUrl,
+    final Map<String, String> verificationDocUrls,
     final String? verificationRejectionReason,
   }) = _$StartupImpl;
 
@@ -365,13 +375,13 @@ abstract class _Startup implements Startup {
   @override
   String? get website;
   @override
-  StartupStage get stage;
+  String? get stage;
   @override
   HiringStatus get hiringStatus;
   @override
   VerificationStatus get verificationStatus;
   @override
-  String? get verificationDocUrl;
+  Map<String, String> get verificationDocUrls;
   @override
   String? get verificationRejectionReason;
 

@@ -31,17 +31,26 @@ class StartupRepository {
     return _cloudinary.uploadFile(filePath, folder: 'startup_logos');
   }
 
-  Future<String> uploadVerificationDoc(String filePath) {
-    return _cloudinary.uploadFile(
+  Future<String> uploadVerificationDocument(
+    String founderId,
+    String categoryId,
+    String filePath,
+  ) async {
+    final url = await _cloudinary.uploadFile(
       filePath,
       folder: 'startup_verification',
       resourceType: CloudinaryResourceType.Raw,
     );
+
+    await _firestore.collection('startups').doc(founderId).set({
+      'verificationDocUrls': {categoryId: url},
+    }, SetOptions(merge: true));
+
+    return url;
   }
 
-  Future<void> submitVerification(String founderId, String docUrl) {
+  Future<void> submitForReview(String founderId) {
     return _firestore.collection('startups').doc(founderId).update({
-      'verificationDocUrl': docUrl,
       'verificationStatus': VerificationStatus.pending.name,
       'verificationRejectionReason': null,
     });

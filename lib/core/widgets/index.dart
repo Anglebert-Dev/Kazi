@@ -11,3 +11,4 @@ export 'avatar_initials.dart';
 export 'empty_state.dart';
 export 'opportunity_card.dart';
 export 'section_header.dart';
+export 'single_select_chip_group.dart';

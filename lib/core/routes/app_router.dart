@@ -2,13 +2,13 @@ import 'package:flutter/foundation.dart';
 import 'package:go_router/go_router.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../features/admin/startups/screens/admin_startups_screen.dart';
 import '../../features/authentication/providers/auth_providers.dart';
 import '../../features/authentication/screens/forgot_password_screen.dart';
 import '../../features/authentication/screens/login_screen.dart';
 import '../../features/authentication/screens/register_screen.dart';
 import '../../features/onboarding/screens/onboarding_role_screen.dart';
 import '../../features/shared/splash_screen.dart';
+import 'admin_shell_route.dart';
 import 'auth_redirect.dart';
 import 'founder_shell_route.dart';
 import 'student_shell_route.dart';
@@ -43,12 +43,9 @@ final appRouterProvider = Provider<GoRouter>((ref) {
         path: '/onboarding',
         builder: (context, state) => const OnboardingRoleScreen(),
       ),
-      GoRoute(
-        path: '/admin/startups',
-        builder: (context, state) => const AdminStartupsScreen(),
-      ),
       studentShellRoute,
       founderShellRoute,
+      adminShellRoute,
     ],
   );
 });

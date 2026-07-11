@@ -6,6 +6,8 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/index.dart';
 import '../../../founder/startup/models/startup.dart';
 import '../../../student/profile/widgets/profile_link_tile.dart';
+import '../../categories/models/category_type.dart';
+import '../../categories/providers/category_providers.dart';
 import '../providers/admin_startup_controller.dart';
 
 class PendingStartupCard extends ConsumerWidget {
@@ -83,11 +85,27 @@ class PendingStartupCard extends ConsumerWidget {
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
-          ProfileLinkTile(
-            icon: Icons.description,
-            label: 'Verification document',
-            actionLabel: 'View document',
-            url: startup.verificationDocUrl,
+          Consumer(
+            builder: (context, ref, _) {
+              final documents = ref
+                  .watch(categoriesByTypeProvider(CategoryType.verificationDocument))
+                  .valueOrNull;
+              final labelById = {
+                for (final doc in documents ?? []) doc.id: doc.label,
+              };
+
+              return Column(
+                children: [
+                  for (final entry in startup.verificationDocUrls.entries)
+                    ProfileLinkTile(
+                      icon: Icons.description,
+                      label: labelById[entry.key] ?? 'Document',
+                      actionLabel: 'View document',
+                      url: entry.value,
+                    ),
+                ],
+              );
+            },
           ),
           const SizedBox(height: AppSpacing.sm),
           Row(

@@ -5,7 +5,8 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/widgets/index.dart';
-import '../constants/skill_options.dart';
+import '../../../admin/categories/models/category_type.dart';
+import '../../../admin/categories/providers/category_providers.dart';
 import '../models/availability_status.dart';
 import '../models/student_profile.dart';
 import '../providers/student_profile_controller.dart';
@@ -146,6 +147,16 @@ class _StudentProfileFormState extends ConsumerState<StudentProfileForm> {
   @override
   Widget build(BuildContext context) {
     final isSaving = ref.watch(studentProfileControllerProvider).isLoading;
+    final skillOptions = ref
+        .watch(categoriesByTypeProvider(CategoryType.skill))
+        .valueOrNull
+        ?.map((category) => category.label)
+        .toList();
+    final interestOptions = ref
+        .watch(categoriesByTypeProvider(CategoryType.interest))
+        .valueOrNull
+        ?.map((category) => category.label)
+        .toList();
 
     return SingleChildScrollView(
       padding: const EdgeInsets.all(AppSpacing.lg),
@@ -166,19 +177,25 @@ class _StudentProfileFormState extends ConsumerState<StudentProfileForm> {
           const SizedBox(height: AppSpacing.lg),
           const SectionHeader(title: 'Skills'),
           const SizedBox(height: AppSpacing.sm),
-          SkillChipSelector(
-            options: skillOptions,
-            selected: _skills,
-            onChanged: (v) => setState(() => _skills = v),
-          ),
+          if (skillOptions == null)
+            const Center(child: CircularProgressIndicator())
+          else
+            SkillChipSelector(
+              options: skillOptions,
+              selected: _skills,
+              onChanged: (v) => setState(() => _skills = v),
+            ),
           const SizedBox(height: AppSpacing.lg),
           const SectionHeader(title: 'Interests'),
           const SizedBox(height: AppSpacing.sm),
-          SkillChipSelector(
-            options: interestOptions,
-            selected: _interests,
-            onChanged: (v) => setState(() => _interests = v),
-          ),
+          if (interestOptions == null)
+            const Center(child: CircularProgressIndicator())
+          else
+            SkillChipSelector(
+              options: interestOptions,
+              selected: _interests,
+              onChanged: (v) => setState(() => _interests = v),
+            ),
           const SizedBox(height: AppSpacing.lg),
           const SectionHeader(title: 'Availability'),
           const SizedBox(height: AppSpacing.sm),

@@ -4,12 +4,12 @@ import 'package:image_picker/image_picker.dart';
 
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/widgets/index.dart';
+import '../../../admin/categories/models/category_type.dart';
+import '../../../admin/categories/providers/category_providers.dart';
 import '../models/hiring_status.dart';
 import '../models/startup.dart';
-import '../models/startup_stage.dart';
 import '../providers/startup_controller.dart';
 import 'hiring_status_selector.dart';
-import 'stage_selector.dart';
 import 'startup_logo_picker.dart';
 
 class StartupForm extends ConsumerStatefulWidget {
@@ -25,18 +25,17 @@ class StartupForm extends ConsumerStatefulWidget {
 class _StartupFormState extends ConsumerState<StartupForm> {
   final _formKey = GlobalKey<FormState>();
   late final _nameController = TextEditingController(text: widget.startup.name);
-  late final _industryController = TextEditingController(text: widget.startup.industry);
   late final _descriptionController = TextEditingController(text: widget.startup.description);
   late final _websiteController = TextEditingController(text: widget.startup.website);
 
-  late StartupStage _stage = widget.startup.stage;
+  late String? _industry = widget.startup.industry;
+  late String? _stage = widget.startup.stage;
   late HiringStatus _hiringStatus = widget.startup.hiringStatus;
   late String? _logoUrl = widget.startup.logoUrl;
 
   @override
   void dispose() {
     _nameController.dispose();
-    _industryController.dispose();
     _descriptionController.dispose();
     _websiteController.dispose();
     super.dispose();
@@ -67,7 +66,7 @@ class _StartupFormState extends ConsumerState<StartupForm> {
 
     final startup = widget.startup.copyWith(
       name: _nameController.text.trim(),
-      industry: _industryController.text.trim(),
+      industry: _industry,
       description: _descriptionController.text.trim(),
       website: _websiteController.text.trim(),
       stage: _stage,
@@ -87,6 +86,16 @@ class _StartupFormState extends ConsumerState<StartupForm> {
   @override
   Widget build(BuildContext context) {
     final isSaving = ref.watch(startupControllerProvider).isLoading;
+    final industries = ref
+        .watch(categoriesByTypeProvider(CategoryType.industry))
+        .valueOrNull
+        ?.map((category) => category.label)
+        .toList();
+    final stages = ref
+        .watch(categoriesByTypeProvider(CategoryType.startupStage))
+        .valueOrNull
+        ?.map((category) => category.label)
+        .toList();
 
     return Form(
       key: _formKey,
@@ -110,15 +119,35 @@ class _StartupFormState extends ConsumerState<StartupForm> {
                   (value == null || value.trim().isEmpty) ? 'Enter a startup name' : null,
             ),
             const SizedBox(height: AppSpacing.md),
-            AppTextField(controller: _industryController, label: 'Industry'),
-            const SizedBox(height: AppSpacing.md),
             AppTextField(controller: _descriptionController, label: 'Description', maxLines: 4),
             const SizedBox(height: AppSpacing.md),
             AppTextField(controller: _websiteController, label: 'Website'),
             const SizedBox(height: AppSpacing.lg),
+            const SectionHeader(title: 'Industry'),
+            const SizedBox(height: AppSpacing.sm),
+            if (industries == null)
+              const Center(child: CircularProgressIndicator())
+            else if (industries.isEmpty)
+              const Text('No industries set up yet — ask an admin to add some.')
+            else
+              SingleSelectChipGroup(
+                options: industries,
+                selected: _industry,
+                onChanged: (v) => setState(() => _industry = v),
+              ),
+            const SizedBox(height: AppSpacing.lg),
             const SectionHeader(title: 'Stage'),
             const SizedBox(height: AppSpacing.sm),
-            StageSelector(value: _stage, onChanged: (v) => setState(() => _stage = v)),
+            if (stages == null)
+              const Center(child: CircularProgressIndicator())
+            else if (stages.isEmpty)
+              const Text('No stages set up yet — ask an admin to add some.')
+            else
+              SingleSelectChipGroup(
+                options: stages,
+                selected: _stage,
+                onChanged: (v) => setState(() => _stage = v),
+              ),
             const SizedBox(height: AppSpacing.lg),
             const SectionHeader(title: 'Hiring status'),
             const SizedBox(height: AppSpacing.sm),

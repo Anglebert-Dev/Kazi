@@ -26,12 +26,25 @@ class StartupController extends _$StartupController {
     return url;
   }
 
-  Future<void> submitVerification(String founderId, String filePath) async {
+  Future<String?> uploadVerificationDocument(
+    String founderId,
+    String categoryId,
+    String filePath,
+  ) async {
     state = const AsyncLoading();
+    String? url;
     state = await AsyncValue.guard(() async {
-      final repository = ref.read(startupRepositoryProvider);
-      final docUrl = await repository.uploadVerificationDoc(filePath);
-      await repository.submitVerification(founderId, docUrl);
+      url = await ref
+          .read(startupRepositoryProvider)
+          .uploadVerificationDocument(founderId, categoryId, filePath);
     });
+    return url;
+  }
+
+  Future<void> submitForReview(String founderId) async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(
+      () => ref.read(startupRepositoryProvider).submitForReview(founderId),
+    );
   }
 }
