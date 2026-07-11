@@ -15,6 +15,7 @@ class OpportunityCard extends StatelessWidget {
     required this.category,
     required this.isRemote,
     required this.isPaid,
+    this.location,
     this.matchScorePercent,
     required this.deadlineLabel,
     this.isBookmarked = false,
@@ -28,6 +29,7 @@ class OpportunityCard extends StatelessWidget {
   final String category;
   final bool isRemote;
   final bool isPaid;
+  final String? location;
   final int? matchScorePercent;
   final String deadlineLabel;
   final bool isBookmarked;
@@ -80,6 +82,8 @@ class OpportunityCard extends StatelessWidget {
               AppChip(label: category),
               AppChip(label: isRemote ? 'Remote' : 'Onsite'),
               AppChip(label: isPaid ? 'Paid' : 'Unpaid'),
+              if ((location ?? '').isNotEmpty)
+                AppChip(label: location!, icon: Icons.location_on_outlined),
               if (matchScorePercent != null)
                 AppChip(label: '$matchScorePercent% Match', icon: Icons.bolt),
             ],

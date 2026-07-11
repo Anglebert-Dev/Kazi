@@ -20,3 +20,8 @@ Stream<Startup> currentStartup(Ref ref) {
   if (user == null) return Stream.value(Startup(founderId: ''));
   return ref.watch(startupRepositoryProvider).watchStartup(user.uid);
 }
+
+@riverpod
+Stream<Startup> startupById(Ref ref, String startupId) {
+  return ref.watch(startupRepositoryProvider).watchStartup(startupId);
+}
