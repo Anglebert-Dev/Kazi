@@ -1,4 +1,5 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:cloudinary_public/cloudinary_public.dart';
 
 import '../../../../core/services/cloudinary_service.dart';
 import '../models/availability_status.dart';
@@ -26,7 +27,11 @@ class StudentProfileRepository {
   }
 
   Future<String> uploadCv(String filePath) {
-    return _cloudinary.uploadFile(filePath, folder: 'cvs');
+    return _cloudinary.uploadFile(
+      filePath,
+      folder: 'cvs',
+      resourceType: CloudinaryResourceType.Raw,
+    );
   }
 
   StudentProfile _fromDoc(DocumentSnapshot<Map<String, dynamic>> doc) {

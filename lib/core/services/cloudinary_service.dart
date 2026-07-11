@@ -11,9 +11,13 @@ class CloudinaryService {
 
   final CloudinaryPublic _cloudinary;
 
-  Future<String> uploadFile(String filePath, {String? folder}) async {
+  Future<String> uploadFile(
+    String filePath, {
+    String? folder,
+    CloudinaryResourceType resourceType = CloudinaryResourceType.Auto,
+  }) async {
     final response = await _cloudinary.uploadFile(
-      CloudinaryFile.fromFile(filePath, folder: folder, resourceType: CloudinaryResourceType.Auto),
+      CloudinaryFile.fromFile(filePath, folder: folder, resourceType: resourceType),
     );
     return response.secureUrl;
   }
