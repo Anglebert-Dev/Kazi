@@ -2,6 +2,7 @@
 .fvm/
 
 INSTRUCTIONS.txt
+Kazi_Technical_Report_Content.txt
 
 # Secrets
 .env
