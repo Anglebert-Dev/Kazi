@@ -23,6 +23,9 @@ mixin _$DashboardStats {
   int get pendingVerificationCount => throw _privateConstructorUsedError;
   int get approvedStartupCount => throw _privateConstructorUsedError;
   int get rejectedStartupCount => throw _privateConstructorUsedError;
+  int get opportunityCount => throw _privateConstructorUsedError;
+  int get applicationCount => throw _privateConstructorUsedError;
+  int get pendingReportCount => throw _privateConstructorUsedError;
 
   /// Create a copy of DashboardStats
   /// with the given fields replaced by the non-null parameter values.
@@ -45,6 +48,9 @@ abstract class $DashboardStatsCopyWith<$Res> {
     int pendingVerificationCount,
     int approvedStartupCount,
     int rejectedStartupCount,
+    int opportunityCount,
+    int applicationCount,
+    int pendingReportCount,
   });
 }
 
@@ -69,6 +75,9 @@ class _$DashboardStatsCopyWithImpl<$Res, $Val extends DashboardStats>
     Object? pendingVerificationCount = null,
     Object? approvedStartupCount = null,
     Object? rejectedStartupCount = null,
+    Object? opportunityCount = null,
+    Object? applicationCount = null,
+    Object? pendingReportCount = null,
   }) {
     return _then(
       _value.copyWith(
@@ -96,6 +105,18 @@ class _$DashboardStatsCopyWithImpl<$Res, $Val extends DashboardStats>
                 ? _value.rejectedStartupCount
                 : rejectedStartupCount // ignore: cast_nullable_to_non_nullable
                       as int,
+            opportunityCount: null == opportunityCount
+                ? _value.opportunityCount
+                : opportunityCount // ignore: cast_nullable_to_non_nullable
+                      as int,
+            applicationCount: null == applicationCount
+                ? _value.applicationCount
+                : applicationCount // ignore: cast_nullable_to_non_nullable
+                      as int,
+            pendingReportCount: null == pendingReportCount
+                ? _value.pendingReportCount
+                : pendingReportCount // ignore: cast_nullable_to_non_nullable
+                      as int,
           )
           as $Val,
     );
@@ -118,6 +139,9 @@ abstract class _$$DashboardStatsImplCopyWith<$Res>
     int pendingVerificationCount,
     int approvedStartupCount,
     int rejectedStartupCount,
+    int opportunityCount,
+    int applicationCount,
+    int pendingReportCount,
   });
 }
 
@@ -141,6 +165,9 @@ class __$$DashboardStatsImplCopyWithImpl<$Res>
     Object? pendingVerificationCount = null,
     Object? approvedStartupCount = null,
     Object? rejectedStartupCount = null,
+    Object? opportunityCount = null,
+    Object? applicationCount = null,
+    Object? pendingReportCount = null,
   }) {
     return _then(
       _$DashboardStatsImpl(
@@ -168,6 +195,18 @@ class __$$DashboardStatsImplCopyWithImpl<$Res>
             ? _value.rejectedStartupCount
             : rejectedStartupCount // ignore: cast_nullable_to_non_nullable
                   as int,
+        opportunityCount: null == opportunityCount
+            ? _value.opportunityCount
+            : opportunityCount // ignore: cast_nullable_to_non_nullable
+                  as int,
+        applicationCount: null == applicationCount
+            ? _value.applicationCount
+            : applicationCount // ignore: cast_nullable_to_non_nullable
+                  as int,
+        pendingReportCount: null == pendingReportCount
+            ? _value.pendingReportCount
+            : pendingReportCount // ignore: cast_nullable_to_non_nullable
+                  as int,
       ),
     );
   }
@@ -183,6 +222,9 @@ class _$DashboardStatsImpl implements _DashboardStats {
     this.pendingVerificationCount = 0,
     this.approvedStartupCount = 0,
     this.rejectedStartupCount = 0,
+    this.opportunityCount = 0,
+    this.applicationCount = 0,
+    this.pendingReportCount = 0,
   });
 
   @override
@@ -203,10 +245,19 @@ class _$DashboardStatsImpl implements _DashboardStats {
   @override
   @JsonKey()
   final int rejectedStartupCount;
+  @override
+  @JsonKey()
+  final int opportunityCount;
+  @override
+  @JsonKey()
+  final int applicationCount;
+  @override
+  @JsonKey()
+  final int pendingReportCount;
 
   @override
   String toString() {
-    return 'DashboardStats(studentCount: $studentCount, founderCount: $founderCount, totalStartupCount: $totalStartupCount, pendingVerificationCount: $pendingVerificationCount, approvedStartupCount: $approvedStartupCount, rejectedStartupCount: $rejectedStartupCount)';
+    return 'DashboardStats(studentCount: $studentCount, founderCount: $founderCount, totalStartupCount: $totalStartupCount, pendingVerificationCount: $pendingVerificationCount, approvedStartupCount: $approvedStartupCount, rejectedStartupCount: $rejectedStartupCount, opportunityCount: $opportunityCount, applicationCount: $applicationCount, pendingReportCount: $pendingReportCount)';
   }
 
   @override
@@ -228,7 +279,13 @@ class _$DashboardStatsImpl implements _DashboardStats {
             (identical(other.approvedStartupCount, approvedStartupCount) ||
                 other.approvedStartupCount == approvedStartupCount) &&
             (identical(other.rejectedStartupCount, rejectedStartupCount) ||
-                other.rejectedStartupCount == rejectedStartupCount));
+                other.rejectedStartupCount == rejectedStartupCount) &&
+            (identical(other.opportunityCount, opportunityCount) ||
+                other.opportunityCount == opportunityCount) &&
+            (identical(other.applicationCount, applicationCount) ||
+                other.applicationCount == applicationCount) &&
+            (identical(other.pendingReportCount, pendingReportCount) ||
+                other.pendingReportCount == pendingReportCount));
   }
 
   @override
@@ -240,6 +297,9 @@ class _$DashboardStatsImpl implements _DashboardStats {
     pendingVerificationCount,
     approvedStartupCount,
     rejectedStartupCount,
+    opportunityCount,
+    applicationCount,
+    pendingReportCount,
   );
 
   /// Create a copy of DashboardStats
@@ -262,6 +322,9 @@ abstract class _DashboardStats implements DashboardStats {
     final int pendingVerificationCount,
     final int approvedStartupCount,
     final int rejectedStartupCount,
+    final int opportunityCount,
+    final int applicationCount,
+    final int pendingReportCount,
   }) = _$DashboardStatsImpl;
 
   @override
@@ -276,6 +339,12 @@ abstract class _DashboardStats implements DashboardStats {
   int get approvedStartupCount;
   @override
   int get rejectedStartupCount;
+  @override
+  int get opportunityCount;
+  @override
+  int get applicationCount;
+  @override
+  int get pendingReportCount;
 
   /// Create a copy of DashboardStats
   /// with the given fields replaced by the non-null parameter values.

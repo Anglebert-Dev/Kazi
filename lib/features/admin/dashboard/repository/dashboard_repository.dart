@@ -17,6 +17,9 @@ class DashboardRepository {
       _countStartupsByStatus(VerificationStatus.pending),
       _countStartupsByStatus(VerificationStatus.approved),
       _countStartupsByStatus(VerificationStatus.rejected),
+      _countCollection('opportunities'),
+      _countCollection('applications'),
+      _countPendingReports(),
     ]);
 
     return DashboardStats(
@@ -26,7 +29,19 @@ class DashboardRepository {
       pendingVerificationCount: counts[3],
       approvedStartupCount: counts[4],
       rejectedStartupCount: counts[5],
+      opportunityCount: counts[6],
+      applicationCount: counts[7],
+      pendingReportCount: counts[8],
     );
+  }
+
+  Future<int> _countPendingReports() async {
+    final snapshot = await _firestore
+        .collection('reports')
+        .where('status', isEqualTo: 'pending')
+        .count()
+        .get();
+    return snapshot.count ?? 0;
   }
 
   Future<int> _countUsersByRole(UserRole role) async {

@@ -6,6 +6,7 @@ import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/index.dart';
 import '../../chat/providers/chat_controller.dart';
 import '../../chat/screens/chat_thread_screen.dart';
+import '../../ratings/widgets/rate_startup_section.dart';
 import '../../student/profile/widgets/profile_link_tile.dart';
 import '../models/application.dart';
 import '../models/application_status.dart';
@@ -104,6 +105,13 @@ class ApplicationDetailScreen extends ConsumerWidget {
             ),
             const SizedBox(height: AppSpacing.md),
             ApplicationStatusBadge(status: application.status),
+            if (!isFounderView && application.status == ApplicationStatus.accepted) ...[
+              const SizedBox(height: AppSpacing.md),
+              RateStartupSection(
+                studentId: application.studentId,
+                startupId: application.startupId,
+              ),
+            ],
             const SizedBox(height: AppSpacing.lg),
             const SectionHeader(title: 'Cover note'),
             const SizedBox(height: AppSpacing.sm),

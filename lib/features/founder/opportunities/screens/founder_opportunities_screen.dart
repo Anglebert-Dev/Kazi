@@ -28,6 +28,19 @@ class FounderOpportunitiesScreen extends ConsumerWidget {
       );
     }
 
+    if (startup.isSuspended) {
+      return Scaffold(
+        appBar: AppBar(title: const Text('Opportunities')),
+        body: EmptyState(
+          icon: Icons.block,
+          title: 'Startup suspended',
+          message:
+              startup.suspensionReason ??
+              'Your startup has been suspended and can no longer post opportunities.',
+        ),
+      );
+    }
+
     final opportunitiesAsync = ref.watch(founderOpportunitiesProvider(startup.founderId));
 
     return Scaffold(

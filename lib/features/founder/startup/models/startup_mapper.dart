@@ -21,6 +21,8 @@ Startup startupFromFirestore(String founderId, Map<String, dynamic> data) {
       data['verificationDocUrls'] as Map? ?? const {},
     ),
     verificationRejectionReason: data['verificationRejectionReason'] as String?,
+    isSuspended: data['isSuspended'] as bool? ?? false,
+    suspensionReason: data['suspensionReason'] as String?,
   );
 }
 

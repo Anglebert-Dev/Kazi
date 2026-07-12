@@ -14,6 +14,7 @@ class AdminShellScreen extends StatelessWidget {
     AppBottomNavItem(icon: Icons.work_outline, label: 'Opportunities'),
     AppBottomNavItem(icon: Icons.people_outline, label: 'Users'),
     AppBottomNavItem(icon: Icons.category_outlined, label: 'Categories'),
+    AppBottomNavItem(icon: Icons.flag_outlined, label: 'Reports'),
   ];
 
   @override

@@ -3,8 +3,11 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/widgets/index.dart';
+import '../../authentication/models/user_role.dart';
+import '../../authentication/providers/auth_providers.dart';
 import '../../founder/startup/providers/startup_providers.dart';
 import '../../founder/startup/widgets/startup_profile_view.dart';
+import '../../reports/widgets/report_startup_dialog.dart';
 import '../providers/opportunity_providers.dart';
 import '../utils/deadline_label.dart';
 import 'opportunity_detail_screen.dart';
@@ -18,9 +21,30 @@ class StartupProfileScreen extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
     final startupAsync = ref.watch(startupByIdProvider(startupId));
     final opportunitiesAsync = ref.watch(founderOpportunitiesProvider(startupId));
+    final userModel = ref.watch(currentUserModelProvider).valueOrNull;
+    final canReport = userModel != null &&
+        userModel.role != UserRole.admin &&
+        userModel.uid != startupId;
 
     return Scaffold(
-      appBar: AppBar(title: const Text('Startup')),
+      appBar: AppBar(
+        title: const Text('Startup'),
+        actions: [
+          if (canReport)
+            IconButton(
+              icon: const Icon(Icons.flag_outlined),
+              onPressed: () {
+                final startup = startupAsync.valueOrNull;
+                if (startup == null) return;
+                ReportStartupDialog.show(
+                  context,
+                  startupId: startupId,
+                  startupName: startup.name ?? 'Startup',
+                );
+              },
+            ),
+        ],
+      ),
       body: startupAsync.when(
         data: (startup) => SingleChildScrollView(
           padding: const EdgeInsets.all(AppSpacing.lg),

@@ -34,4 +34,18 @@ class AdminStartupRepository {
       'verificationRejectionReason': reason,
     });
   }
+
+  Future<void> suspend(String founderId, String reason) {
+    return _firestore.collection('startups').doc(founderId).update({
+      'isSuspended': true,
+      'suspensionReason': reason,
+    });
+  }
+
+  Future<void> unsuspend(String founderId) {
+    return _firestore.collection('startups').doc(founderId).update({
+      'isSuspended': false,
+      'suspensionReason': null,
+    });
+  }
 }

@@ -11,5 +11,8 @@ class DashboardStats with _$DashboardStats {
     @Default(0) int pendingVerificationCount,
     @Default(0) int approvedStartupCount,
     @Default(0) int rejectedStartupCount,
+    @Default(0) int opportunityCount,
+    @Default(0) int applicationCount,
+    @Default(0) int pendingReportCount,
   }) = _DashboardStats;
 }

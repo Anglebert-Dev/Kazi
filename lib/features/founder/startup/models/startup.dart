@@ -19,5 +19,7 @@ class Startup with _$Startup {
     @Default(VerificationStatus.unverified) VerificationStatus verificationStatus,
     @Default(<String, String>{}) Map<String, String> verificationDocUrls,
     String? verificationRejectionReason,
+    @Default(false) bool isSuspended,
+    String? suspensionReason,
   }) = _Startup;
 }

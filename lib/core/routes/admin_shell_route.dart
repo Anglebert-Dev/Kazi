@@ -4,6 +4,7 @@ import '../../features/admin/admin_shell_screen.dart';
 import '../../features/admin/categories/screens/admin_categories_screen.dart';
 import '../../features/admin/dashboard/screens/admin_dashboard_screen.dart';
 import '../../features/admin/opportunities/screens/admin_opportunities_screen.dart';
+import '../../features/admin/reports/screens/admin_reports_screen.dart';
 import '../../features/admin/startups/screens/admin_startups_screen.dart';
 import '../../features/admin/users/screens/admin_users_screen.dart';
 
@@ -37,6 +38,11 @@ final adminShellRoute = StatefulShellRoute.indexedStack(
     StatefulShellBranch(
       routes: [
         GoRoute(path: '/admin/categories', builder: (c, s) => const AdminCategoriesScreen()),
+      ],
+    ),
+    StatefulShellBranch(
+      routes: [
+        GoRoute(path: '/admin/reports', builder: (c, s) => const AdminReportsScreen()),
       ],
     ),
   ],

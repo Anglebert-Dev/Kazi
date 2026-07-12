@@ -3,10 +3,12 @@ import 'package:flutter/material.dart';
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/index.dart';
+import '../../../ratings/widgets/rating_summary.dart';
 import '../../../student/profile/widgets/profile_info_row.dart';
 import '../../../student/profile/widgets/profile_link_tile.dart';
 import '../models/hiring_status.dart';
 import '../models/startup.dart';
+import 'suspended_startup_banner.dart';
 import 'verification_badge.dart';
 
 class StartupProfileView extends StatelessWidget {
@@ -44,10 +46,16 @@ class StartupProfileView extends StatelessWidget {
                   VerificationBadge(status: startup.verificationStatus),
                 ],
               ),
+              const SizedBox(height: AppSpacing.xs),
+              RatingSummary(startupId: startup.founderId),
             ],
           ),
         ),
         const SizedBox(height: AppSpacing.lg),
+        if (startup.isSuspended) ...[
+          SuspendedStartupBanner(reason: startup.suspensionReason),
+          const SizedBox(height: AppSpacing.lg),
+        ],
         if ((startup.description ?? '').isNotEmpty) ...[
           Text(startup.description!, style: const TextStyle(color: AppColors.textPrimary)),
           const SizedBox(height: AppSpacing.lg),

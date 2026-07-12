@@ -61,6 +61,21 @@ class AdminDashboardScreen extends ConsumerWidget {
                 label: 'Rejected Startups',
                 value: stats.rejectedStartupCount,
               ),
+              StatCard(
+                icon: Icons.work_outline,
+                label: 'Opportunities',
+                value: stats.opportunityCount,
+              ),
+              StatCard(
+                icon: Icons.assignment_outlined,
+                label: 'Applications',
+                value: stats.applicationCount,
+              ),
+              StatCard(
+                icon: Icons.flag_outlined,
+                label: 'Pending Reports',
+                value: stats.pendingReportCount,
+              ),
             ],
           ),
         ),

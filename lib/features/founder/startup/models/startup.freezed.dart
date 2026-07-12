@@ -30,6 +30,8 @@ mixin _$Startup {
   Map<String, String> get verificationDocUrls =>
       throw _privateConstructorUsedError;
   String? get verificationRejectionReason => throw _privateConstructorUsedError;
+  bool get isSuspended => throw _privateConstructorUsedError;
+  String? get suspensionReason => throw _privateConstructorUsedError;
 
   /// Create a copy of Startup
   /// with the given fields replaced by the non-null parameter values.
@@ -54,6 +56,8 @@ abstract class $StartupCopyWith<$Res> {
     VerificationStatus verificationStatus,
     Map<String, String> verificationDocUrls,
     String? verificationRejectionReason,
+    bool isSuspended,
+    String? suspensionReason,
   });
 }
 
@@ -83,6 +87,8 @@ class _$StartupCopyWithImpl<$Res, $Val extends Startup>
     Object? verificationStatus = null,
     Object? verificationDocUrls = null,
     Object? verificationRejectionReason = freezed,
+    Object? isSuspended = null,
+    Object? suspensionReason = freezed,
   }) {
     return _then(
       _value.copyWith(
@@ -130,6 +136,14 @@ class _$StartupCopyWithImpl<$Res, $Val extends Startup>
                 ? _value.verificationRejectionReason
                 : verificationRejectionReason // ignore: cast_nullable_to_non_nullable
                       as String?,
+            isSuspended: null == isSuspended
+                ? _value.isSuspended
+                : isSuspended // ignore: cast_nullable_to_non_nullable
+                      as bool,
+            suspensionReason: freezed == suspensionReason
+                ? _value.suspensionReason
+                : suspensionReason // ignore: cast_nullable_to_non_nullable
+                      as String?,
           )
           as $Val,
     );
@@ -156,6 +170,8 @@ abstract class _$$StartupImplCopyWith<$Res> implements $StartupCopyWith<$Res> {
     VerificationStatus verificationStatus,
     Map<String, String> verificationDocUrls,
     String? verificationRejectionReason,
+    bool isSuspended,
+    String? suspensionReason,
   });
 }
 
@@ -184,6 +200,8 @@ class __$$StartupImplCopyWithImpl<$Res>
     Object? verificationStatus = null,
     Object? verificationDocUrls = null,
     Object? verificationRejectionReason = freezed,
+    Object? isSuspended = null,
+    Object? suspensionReason = freezed,
   }) {
     return _then(
       _$StartupImpl(
@@ -231,6 +249,14 @@ class __$$StartupImplCopyWithImpl<$Res>
             ? _value.verificationRejectionReason
             : verificationRejectionReason // ignore: cast_nullable_to_non_nullable
                   as String?,
+        isSuspended: null == isSuspended
+            ? _value.isSuspended
+            : isSuspended // ignore: cast_nullable_to_non_nullable
+                  as bool,
+        suspensionReason: freezed == suspensionReason
+            ? _value.suspensionReason
+            : suspensionReason // ignore: cast_nullable_to_non_nullable
+                  as String?,
       ),
     );
   }
@@ -251,6 +277,8 @@ class _$StartupImpl implements _Startup {
     this.verificationStatus = VerificationStatus.unverified,
     final Map<String, String> verificationDocUrls = const <String, String>{},
     this.verificationRejectionReason,
+    this.isSuspended = false,
+    this.suspensionReason,
   }) : _verificationDocUrls = verificationDocUrls;
 
   @override
@@ -285,10 +313,15 @@ class _$StartupImpl implements _Startup {
 
   @override
   final String? verificationRejectionReason;
+  @override
+  @JsonKey()
+  final bool isSuspended;
+  @override
+  final String? suspensionReason;
 
   @override
   String toString() {
-    return 'Startup(founderId: $founderId, logoUrl: $logoUrl, name: $name, industry: $industry, description: $description, website: $website, stage: $stage, hiringStatus: $hiringStatus, verificationStatus: $verificationStatus, verificationDocUrls: $verificationDocUrls, verificationRejectionReason: $verificationRejectionReason)';
+    return 'Startup(founderId: $founderId, logoUrl: $logoUrl, name: $name, industry: $industry, description: $description, website: $website, stage: $stage, hiringStatus: $hiringStatus, verificationStatus: $verificationStatus, verificationDocUrls: $verificationDocUrls, verificationRejectionReason: $verificationRejectionReason, isSuspended: $isSuspended, suspensionReason: $suspensionReason)';
   }
 
   @override
@@ -319,7 +352,11 @@ class _$StartupImpl implements _Startup {
                   verificationRejectionReason,
                 ) ||
                 other.verificationRejectionReason ==
-                    verificationRejectionReason));
+                    verificationRejectionReason) &&
+            (identical(other.isSuspended, isSuspended) ||
+                other.isSuspended == isSuspended) &&
+            (identical(other.suspensionReason, suspensionReason) ||
+                other.suspensionReason == suspensionReason));
   }
 
   @override
@@ -336,6 +373,8 @@ class _$StartupImpl implements _Startup {
     verificationStatus,
     const DeepCollectionEquality().hash(_verificationDocUrls),
     verificationRejectionReason,
+    isSuspended,
+    suspensionReason,
   );
 
   /// Create a copy of Startup
@@ -360,6 +399,8 @@ abstract class _Startup implements Startup {
     final VerificationStatus verificationStatus,
     final Map<String, String> verificationDocUrls,
     final String? verificationRejectionReason,
+    final bool isSuspended,
+    final String? suspensionReason,
   }) = _$StartupImpl;
 
   @override
@@ -384,6 +425,10 @@ abstract class _Startup implements Startup {
   Map<String, String> get verificationDocUrls;
   @override
   String? get verificationRejectionReason;
+  @override
+  bool get isSuspended;
+  @override
+  String? get suspensionReason;
 
   /// Create a copy of Startup
   /// with the given fields replaced by the non-null parameter values.

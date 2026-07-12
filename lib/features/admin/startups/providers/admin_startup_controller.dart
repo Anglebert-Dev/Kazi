@@ -38,4 +38,18 @@ class AdminStartupController extends _$AdminStartupController {
           );
     });
   }
+
+  Future<void> suspend(String founderId, String reason) async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      await ref.read(adminStartupRepositoryProvider).suspend(founderId, reason);
+      await ref
+          .read(notificationRepositoryProvider)
+          .send(
+            userId: founderId,
+            type: NotificationType.verificationResult,
+            message: 'Your startup has been suspended: $reason',
+          );
+    });
+  }
 }
