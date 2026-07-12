@@ -104,6 +104,9 @@ class _StudentSearchScreenState extends ConsumerState<StudentSearchScreen> {
                           isRemote: opportunity.isRemote,
                           isPaid: opportunity.isPaid,
                           location: opportunity.location,
+                          statusLabel: opportunity.isAcceptingApplications
+                              ? null
+                              : opportunity.applicationStatusLabel,
                           deadlineLabel: deadlineLabel(opportunity.deadline),
                           isBookmarked: bookmarkedIds.contains(opportunity.id),
                           onBookmarkTap: () => ref

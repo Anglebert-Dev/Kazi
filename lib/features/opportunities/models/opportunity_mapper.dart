@@ -20,6 +20,7 @@ Opportunity opportunityFromFirestore(String id, Map<String, dynamic> data) {
     responsibilities: data['responsibilities'] as String?,
     benefits: data['benefits'] as String?,
     applicationEmail: data['applicationEmail'] as String? ?? '',
+    isClosed: data['isClosed'] as bool? ?? false,
     createdAt: (data['createdAt'] as Timestamp?)?.toDate() ?? DateTime.now(),
   );
 }
@@ -41,6 +42,7 @@ Map<String, dynamic> opportunityToMap(Opportunity opportunity) {
     'responsibilities': opportunity.responsibilities,
     'benefits': opportunity.benefits,
     'applicationEmail': opportunity.applicationEmail,
+    'isClosed': opportunity.isClosed,
     'createdAt': FieldValue.serverTimestamp(),
   };
 }

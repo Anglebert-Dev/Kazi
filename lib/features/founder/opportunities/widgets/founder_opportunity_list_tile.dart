@@ -58,6 +58,13 @@ class FounderOpportunityListTile extends ConsumerWidget {
                 ),
               ),
               IconButton(
+                icon: Icon(opportunity.isClosed ? Icons.play_circle_outline : Icons.pause_circle_outline),
+                tooltip: opportunity.isClosed ? 'Reopen applications' : 'Close applications',
+                onPressed: () => ref
+                    .read(opportunityControllerProvider.notifier)
+                    .save(opportunity.copyWith(isClosed: !opportunity.isClosed)),
+              ),
+              IconButton(
                 icon: const Icon(Icons.edit_outlined),
                 onPressed: onEdit,
               ),
@@ -76,6 +83,8 @@ class FounderOpportunityListTile extends ConsumerWidget {
               AppChip(label: opportunity.isPaid ? 'Paid' : 'Unpaid'),
               if ((opportunity.location ?? '').isNotEmpty)
                 AppChip(label: opportunity.location!, icon: Icons.location_on_outlined),
+              if (!opportunity.isAcceptingApplications)
+                AppChip(label: opportunity.applicationStatusLabel, icon: Icons.block),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),

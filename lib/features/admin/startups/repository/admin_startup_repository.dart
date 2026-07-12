@@ -21,6 +21,14 @@ class AdminStartupRepository {
         );
   }
 
+  Stream<List<Startup>> watchAllStartups() {
+    return _firestore.collection('startups').snapshots().map(
+      (snapshot) => [
+        for (final doc in snapshot.docs) startupFromFirestore(doc.id, doc.data()),
+      ],
+    );
+  }
+
   Future<void> approve(String founderId) {
     return _firestore.collection('startups').doc(founderId).update({
       'verificationStatus': VerificationStatus.approved.name,

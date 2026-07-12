@@ -33,6 +33,7 @@ mixin _$Opportunity {
   String? get responsibilities => throw _privateConstructorUsedError;
   String? get benefits => throw _privateConstructorUsedError;
   String get applicationEmail => throw _privateConstructorUsedError;
+  bool get isClosed => throw _privateConstructorUsedError;
   DateTime get createdAt => throw _privateConstructorUsedError;
 
   /// Create a copy of Opportunity
@@ -66,6 +67,7 @@ abstract class $OpportunityCopyWith<$Res> {
     String? responsibilities,
     String? benefits,
     String applicationEmail,
+    bool isClosed,
     DateTime createdAt,
   });
 }
@@ -101,6 +103,7 @@ class _$OpportunityCopyWithImpl<$Res, $Val extends Opportunity>
     Object? responsibilities = freezed,
     Object? benefits = freezed,
     Object? applicationEmail = null,
+    Object? isClosed = null,
     Object? createdAt = null,
   }) {
     return _then(
@@ -169,6 +172,10 @@ class _$OpportunityCopyWithImpl<$Res, $Val extends Opportunity>
                 ? _value.applicationEmail
                 : applicationEmail // ignore: cast_nullable_to_non_nullable
                       as String,
+            isClosed: null == isClosed
+                ? _value.isClosed
+                : isClosed // ignore: cast_nullable_to_non_nullable
+                      as bool,
             createdAt: null == createdAt
                 ? _value.createdAt
                 : createdAt // ignore: cast_nullable_to_non_nullable
@@ -205,6 +212,7 @@ abstract class _$$OpportunityImplCopyWith<$Res>
     String? responsibilities,
     String? benefits,
     String applicationEmail,
+    bool isClosed,
     DateTime createdAt,
   });
 }
@@ -239,6 +247,7 @@ class __$$OpportunityImplCopyWithImpl<$Res>
     Object? responsibilities = freezed,
     Object? benefits = freezed,
     Object? applicationEmail = null,
+    Object? isClosed = null,
     Object? createdAt = null,
   }) {
     return _then(
@@ -307,6 +316,10 @@ class __$$OpportunityImplCopyWithImpl<$Res>
             ? _value.applicationEmail
             : applicationEmail // ignore: cast_nullable_to_non_nullable
                   as String,
+        isClosed: null == isClosed
+            ? _value.isClosed
+            : isClosed // ignore: cast_nullable_to_non_nullable
+                  as bool,
         createdAt: null == createdAt
             ? _value.createdAt
             : createdAt // ignore: cast_nullable_to_non_nullable
@@ -318,7 +331,7 @@ class __$$OpportunityImplCopyWithImpl<$Res>
 
 /// @nodoc
 
-class _$OpportunityImpl implements _Opportunity {
+class _$OpportunityImpl extends _Opportunity {
   const _$OpportunityImpl({
     required this.id,
     required this.startupId,
@@ -336,8 +349,10 @@ class _$OpportunityImpl implements _Opportunity {
     this.responsibilities,
     this.benefits,
     this.applicationEmail = '',
+    this.isClosed = false,
     required this.createdAt,
-  }) : _requiredSkills = requiredSkills;
+  }) : _requiredSkills = requiredSkills,
+       super._();
 
   @override
   final String id;
@@ -382,11 +397,14 @@ class _$OpportunityImpl implements _Opportunity {
   @JsonKey()
   final String applicationEmail;
   @override
+  @JsonKey()
+  final bool isClosed;
+  @override
   final DateTime createdAt;
 
   @override
   String toString() {
-    return 'Opportunity(id: $id, startupId: $startupId, startupName: $startupName, startupLogoUrl: $startupLogoUrl, title: $title, description: $description, category: $category, requiredSkills: $requiredSkills, duration: $duration, location: $location, isPaid: $isPaid, isRemote: $isRemote, deadline: $deadline, responsibilities: $responsibilities, benefits: $benefits, applicationEmail: $applicationEmail, createdAt: $createdAt)';
+    return 'Opportunity(id: $id, startupId: $startupId, startupName: $startupName, startupLogoUrl: $startupLogoUrl, title: $title, description: $description, category: $category, requiredSkills: $requiredSkills, duration: $duration, location: $location, isPaid: $isPaid, isRemote: $isRemote, deadline: $deadline, responsibilities: $responsibilities, benefits: $benefits, applicationEmail: $applicationEmail, isClosed: $isClosed, createdAt: $createdAt)';
   }
 
   @override
@@ -425,6 +443,8 @@ class _$OpportunityImpl implements _Opportunity {
                 other.benefits == benefits) &&
             (identical(other.applicationEmail, applicationEmail) ||
                 other.applicationEmail == applicationEmail) &&
+            (identical(other.isClosed, isClosed) ||
+                other.isClosed == isClosed) &&
             (identical(other.createdAt, createdAt) ||
                 other.createdAt == createdAt));
   }
@@ -448,6 +468,7 @@ class _$OpportunityImpl implements _Opportunity {
     responsibilities,
     benefits,
     applicationEmail,
+    isClosed,
     createdAt,
   );
 
@@ -460,7 +481,7 @@ class _$OpportunityImpl implements _Opportunity {
       __$$OpportunityImplCopyWithImpl<_$OpportunityImpl>(this, _$identity);
 }
 
-abstract class _Opportunity implements Opportunity {
+abstract class _Opportunity extends Opportunity {
   const factory _Opportunity({
     required final String id,
     required final String startupId,
@@ -478,8 +499,10 @@ abstract class _Opportunity implements Opportunity {
     final String? responsibilities,
     final String? benefits,
     final String applicationEmail,
+    final bool isClosed,
     required final DateTime createdAt,
   }) = _$OpportunityImpl;
+  const _Opportunity._() : super._();
 
   @override
   String get id;
@@ -513,6 +536,8 @@ abstract class _Opportunity implements Opportunity {
   String? get benefits;
   @override
   String get applicationEmail;
+  @override
+  bool get isClosed;
   @override
   DateTime get createdAt;
 

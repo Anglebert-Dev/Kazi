@@ -47,6 +47,9 @@ class BookmarksScreen extends ConsumerWidget {
                         isRemote: opportunity.isRemote,
                         isPaid: opportunity.isPaid,
                         location: opportunity.location,
+                        statusLabel: opportunity.isAcceptingApplications
+                            ? null
+                            : opportunity.applicationStatusLabel,
                         deadlineLabel: deadlineLabel(opportunity.deadline),
                         isBookmarked: true,
                         onBookmarkTap: () => ref

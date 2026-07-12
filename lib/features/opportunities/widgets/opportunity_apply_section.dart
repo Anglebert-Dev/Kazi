@@ -8,6 +8,7 @@ import '../../../core/widgets/index.dart';
 import '../../applications/providers/application_providers.dart';
 import '../../applications/screens/application_detail_screen.dart';
 import '../../applications/widgets/application_status_badge.dart';
+import '../../authentication/models/user_role.dart';
 import '../../authentication/providers/auth_providers.dart';
 import '../../student/applications/screens/opportunity_apply_screen.dart';
 import '../models/opportunity.dart';
@@ -35,6 +36,8 @@ class OpportunityApplySection extends ConsumerWidget {
               .watch(applicationForOpportunityProvider(userModel.uid, opportunity.id))
               .valueOrNull;
 
+    if (userModel?.role != UserRole.student) return const SizedBox.shrink();
+
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -54,6 +57,17 @@ class OpportunityApplySection extends ConsumerWidget {
             ),
             fullWidth: true,
           ),
+        ] else if (!opportunity.isAcceptingApplications) ...[
+          Row(
+            children: [
+              const Icon(Icons.block, color: AppColors.textSecondary, size: 18),
+              const SizedBox(width: AppSpacing.xs),
+              Text(
+                opportunity.applicationStatusLabel,
+                style: const TextStyle(color: AppColors.textSecondary),
+              ),
+            ],
+          ),
         ] else
           AppButton(
             label: 'Apply now',
@@ -65,7 +79,7 @@ class OpportunityApplySection extends ConsumerWidget {
             ),
             fullWidth: true,
           ),
-        if (opportunity.applicationEmail.isNotEmpty) ...[
+        if (opportunity.isAcceptingApplications && opportunity.applicationEmail.isNotEmpty) ...[
           const SizedBox(height: AppSpacing.sm),
           Center(
             child: TextButton(

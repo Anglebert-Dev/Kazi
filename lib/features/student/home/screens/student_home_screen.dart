@@ -1,9 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 import '../../../../core/constants/app_spacing.dart';
 import '../../../../core/widgets/index.dart';
+import '../../../admin/dashboard/widgets/stat_card.dart';
+import '../../../applications/providers/application_providers.dart';
 import '../../../authentication/providers/auth_providers.dart';
+import '../../../notifications/widgets/notification_bell_button.dart';
 import '../../../opportunities/models/opportunity.dart';
 import '../../../opportunities/providers/opportunity_providers.dart';
 import '../../../opportunities/screens/opportunity_detail_screen.dart';
@@ -11,7 +15,6 @@ import '../../../opportunities/utils/deadline_label.dart';
 import '../../../opportunities/utils/match_score.dart';
 import '../../bookmarks/providers/bookmark_controller.dart';
 import '../../bookmarks/providers/bookmark_providers.dart';
-import '../../../notifications/widgets/notification_bell_button.dart';
 import '../../bookmarks/screens/bookmarks_screen.dart';
 import '../../profile/providers/student_profile_providers.dart';
 
@@ -24,6 +27,9 @@ class StudentHomeScreen extends ConsumerWidget {
     final studentSkills = ref.watch(currentStudentProfileProvider).valueOrNull?.skills ?? const [];
     final opportunitiesAsync = ref.watch(allOpportunitiesProvider);
     final bookmarkedIds = ref.watch(bookmarkedOpportunityIdsProvider).valueOrNull ?? const {};
+    final applicationCount = userModel == null
+        ? 0
+        : ref.watch(studentApplicationsProvider(userModel.uid)).valueOrNull?.length ?? 0;
 
     return Scaffold(
       appBar: AppBar(
@@ -68,6 +74,7 @@ class StudentHomeScreen extends ConsumerWidget {
                 isRemote: opportunity.isRemote,
                 isPaid: opportunity.isPaid,
                 location: opportunity.location,
+                statusLabel: opportunity.isAcceptingApplications ? null : opportunity.applicationStatusLabel,
                 matchScorePercent: matchScore,
                 deadlineLabel: deadlineLabel(opportunity.deadline),
                 isBookmarked: bookmarkedIds.contains(opportunity.id),
@@ -86,6 +93,30 @@ class StudentHomeScreen extends ConsumerWidget {
           return ListView(
             padding: const EdgeInsets.all(AppSpacing.lg),
             children: [
+              Row(
+                children: [
+                  Expanded(
+                    child: StatCard(
+                      icon: Icons.assignment_outlined,
+                      label: 'My Applications',
+                      value: applicationCount,
+                      onTap: () => context.go('/student/applications'),
+                    ),
+                  ),
+                  const SizedBox(width: AppSpacing.sm),
+                  Expanded(
+                    child: StatCard(
+                      icon: Icons.bookmark_outline,
+                      label: 'Bookmarks',
+                      value: bookmarkedIds.length,
+                      onTap: () => Navigator.of(
+                        context,
+                      ).push(MaterialPageRoute(builder: (context) => const BookmarksScreen())),
+                    ),
+                  ),
+                ],
+              ),
+              const SizedBox(height: AppSpacing.lg),
               if (recommended.isNotEmpty) ...[
                 const SectionHeader(title: 'Recommended for you'),
                 const SizedBox(height: AppSpacing.sm),

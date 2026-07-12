@@ -44,5 +44,22 @@ final pendingStartupsProvider =
 @Deprecated('Will be removed in 3.0. Use Ref instead')
 // ignore: unused_element
 typedef PendingStartupsRef = AutoDisposeStreamProviderRef<List<Startup>>;
+String _$allStartupsHash() => r'12eff0ee21cac2327bc92657038f6834ea53e6f1';
+
+/// See also [allStartups].
+@ProviderFor(allStartups)
+final allStartupsProvider = AutoDisposeStreamProvider<List<Startup>>.internal(
+  allStartups,
+  name: r'allStartupsProvider',
+  debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+      ? null
+      : _$allStartupsHash,
+  dependencies: null,
+  allTransitiveDependencies: null,
+);
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+typedef AllStartupsRef = AutoDisposeStreamProviderRef<List<Startup>>;
 // ignore_for_file: type=lint
 // ignore_for_file: subtype_of_sealed_class, invalid_use_of_internal_member, invalid_use_of_visible_for_testing_member, deprecated_member_use_from_same_package

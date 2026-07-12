@@ -21,8 +21,19 @@ class Opportunity with _$Opportunity {
     String? responsibilities,
     String? benefits,
     @Default('') String applicationEmail,
+    @Default(false) bool isClosed,
     required DateTime createdAt,
   }) = _Opportunity;
+
+  const Opportunity._();
+
+  bool get isAcceptingApplications => !isClosed && deadline.isAfter(DateTime.now());
+
+  String get applicationStatusLabel {
+    if (isClosed) return 'Applications closed';
+    if (!deadline.isAfter(DateTime.now())) return 'Deadline passed';
+    return 'Open';
+  }
 
   static Opportunity draft({
     required String startupId,

@@ -5,15 +5,23 @@ import '../../../../core/theme/app_colors.dart';
 import '../../../../core/widgets/index.dart';
 
 class StatCard extends StatelessWidget {
-  const StatCard({super.key, required this.icon, required this.label, required this.value});
+  const StatCard({
+    super.key,
+    required this.icon,
+    required this.label,
+    required this.value,
+    this.onTap,
+  });
 
   final IconData icon;
   final String label;
   final int value;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     return AppCard(
+      onTap: onTap,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [

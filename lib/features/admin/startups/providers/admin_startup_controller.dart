@@ -52,4 +52,18 @@ class AdminStartupController extends _$AdminStartupController {
           );
     });
   }
+
+  Future<void> unsuspend(String founderId) async {
+    state = const AsyncLoading();
+    state = await AsyncValue.guard(() async {
+      await ref.read(adminStartupRepositoryProvider).unsuspend(founderId);
+      await ref
+          .read(notificationRepositoryProvider)
+          .send(
+            userId: founderId,
+            type: NotificationType.verificationResult,
+            message: 'Your startup has been unsuspended and can post opportunities again',
+          );
+    });
+  }
 }

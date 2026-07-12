@@ -18,6 +18,7 @@ class OpportunityCard extends StatelessWidget {
     this.location,
     this.matchScorePercent,
     required this.deadlineLabel,
+    this.statusLabel,
     this.isBookmarked = false,
     this.onBookmarkTap,
     this.onTap,
@@ -32,6 +33,7 @@ class OpportunityCard extends StatelessWidget {
   final String? location;
   final int? matchScorePercent;
   final String deadlineLabel;
+  final String? statusLabel;
   final bool isBookmarked;
   final VoidCallback? onBookmarkTap;
   final VoidCallback? onTap;
@@ -65,13 +67,14 @@ class OpportunityCard extends StatelessWidget {
                   ],
                 ),
               ),
-              IconButton(
-                onPressed: onBookmarkTap,
-                icon: Icon(
-                  isBookmarked ? Icons.bookmark : Icons.bookmark_border,
-                  color: AppColors.primary,
+              if (onBookmarkTap != null)
+                IconButton(
+                  onPressed: onBookmarkTap,
+                  icon: Icon(
+                    isBookmarked ? Icons.bookmark : Icons.bookmark_border,
+                    color: AppColors.primary,
+                  ),
                 ),
-              ),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),
@@ -86,6 +89,8 @@ class OpportunityCard extends StatelessWidget {
                 AppChip(label: location!, icon: Icons.location_on_outlined),
               if (matchScorePercent != null)
                 AppChip(label: '$matchScorePercent% Match', icon: Icons.bolt),
+              if ((statusLabel ?? '').isNotEmpty)
+                AppChip(label: statusLabel!, icon: Icons.block),
             ],
           ),
           const SizedBox(height: AppSpacing.sm),

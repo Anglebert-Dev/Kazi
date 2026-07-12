@@ -16,3 +16,8 @@ AdminStartupRepository adminStartupRepository(Ref ref) {
 Stream<List<Startup>> pendingStartups(Ref ref) {
   return ref.watch(adminStartupRepositoryProvider).watchPendingStartups();
 }
+
+@riverpod
+Stream<List<Startup>> allStartups(Ref ref) {
+  return ref.watch(adminStartupRepositoryProvider).watchAllStartups();
+}
