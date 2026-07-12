@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 
-import '../../../shared/feature_placeholder_screen.dart';
+import '../../../chat/screens/conversations_list_screen.dart';
 
 class FounderMessagesScreen extends StatelessWidget {
   const FounderMessagesScreen({super.key});
 
   @override
-  Widget build(BuildContext context) => const FeaturePlaceholderScreen(title: 'Messages');
+  Widget build(BuildContext context) => const ConversationsListScreen();
 }

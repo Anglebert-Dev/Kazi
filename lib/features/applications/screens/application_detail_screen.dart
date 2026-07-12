@@ -4,6 +4,8 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/index.dart';
+import '../../chat/providers/chat_controller.dart';
+import '../../chat/screens/chat_thread_screen.dart';
 import '../../student/profile/widgets/profile_link_tile.dart';
 import '../models/application.dart';
 import '../models/application_status.dart';
@@ -20,6 +22,27 @@ class ApplicationDetailScreen extends ConsumerWidget {
   final Application application;
   final bool isFounderView;
 
+  Future<void> _openChat(BuildContext context, WidgetRef ref) async {
+    final conversationId = await ref
+        .read(chatControllerProvider.notifier)
+        .startConversation(
+          studentId: application.studentId,
+          studentName: application.studentName,
+          studentPhotoUrl: application.studentPhotoUrl,
+          founderId: application.startupId,
+          founderName: application.startupName,
+          founderPhotoUrl: application.startupLogoUrl,
+          opportunityId: application.opportunityId,
+          opportunityTitle: application.opportunityTitle,
+        );
+
+    if (context.mounted) {
+      Navigator.of(context).push(
+        MaterialPageRoute(builder: (context) => ChatThreadScreen(conversationId: conversationId)),
+      );
+    }
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final isUpdating = ref.watch(applicationControllerProvider).isLoading;
@@ -28,6 +51,11 @@ class ApplicationDetailScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text(isFounderView ? application.studentName : application.opportunityTitle),
         actions: [
+          if (application.status != ApplicationStatus.rejected)
+            IconButton(
+              icon: const Icon(Icons.chat_bubble_outline),
+              onPressed: () => _openChat(context, ref),
+            ),
           if (isFounderView)
             PopupMenuButton<ApplicationStatus>(
               enabled: !isUpdating,
