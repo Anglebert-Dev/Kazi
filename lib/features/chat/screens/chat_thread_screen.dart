@@ -46,6 +46,7 @@ class _ChatThreadScreenState extends ConsumerState<ChatThreadScreen> {
     final userModel = ref.watch(currentUserModelProvider).valueOrNull;
     final conversationAsync = ref.watch(conversationByIdProvider(widget.conversationId));
     final messagesAsync = ref.watch(messagesProvider(widget.conversationId));
+    final isSending = ref.watch(chatControllerProvider).isLoading;
 
     if (userModel == null) return const Scaffold();
 
@@ -85,7 +86,9 @@ class _ChatThreadScreenState extends ConsumerState<ChatThreadScreen> {
                 const SizedBox(width: AppSpacing.sm),
                 IconButton(
                   icon: const Icon(Icons.send),
-                  onPressed: otherId == null ? null : () => _send(userModel.uid, otherId),
+                  onPressed: (otherId == null || isSending)
+                      ? null
+                      : () => _send(userModel.uid, otherId),
                 ),
               ],
             ),

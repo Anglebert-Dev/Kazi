@@ -18,6 +18,11 @@ Stream<Application?> applicationForOpportunity(Ref ref, String studentId, String
 }
 
 @riverpod
+Stream<Application?> applicationById(Ref ref, String applicationId) {
+  return ref.watch(applicationRepositoryProvider).watchByApplicationId(applicationId);
+}
+
+@riverpod
 Stream<List<Application>> studentApplications(Ref ref, String studentId) {
   return ref.watch(applicationRepositoryProvider).watchByStudent(studentId);
 }

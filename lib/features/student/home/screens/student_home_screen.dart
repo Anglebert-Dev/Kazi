@@ -11,6 +11,7 @@ import '../../../opportunities/utils/deadline_label.dart';
 import '../../../opportunities/utils/match_score.dart';
 import '../../bookmarks/providers/bookmark_controller.dart';
 import '../../bookmarks/providers/bookmark_providers.dart';
+import '../../../notifications/widgets/notification_bell_button.dart';
 import '../../bookmarks/screens/bookmarks_screen.dart';
 import '../../profile/providers/student_profile_providers.dart';
 
@@ -28,6 +29,7 @@ class StudentHomeScreen extends ConsumerWidget {
       appBar: AppBar(
         title: Text('Hi, ${userModel?.displayName ?? 'there'}'),
         actions: [
+          const NotificationBellButton(),
           IconButton(
             icon: const Icon(Icons.bookmark_outline),
             onPressed: () => Navigator.of(

@@ -191,6 +191,127 @@ class _ApplicationForOpportunityProviderElement
       (origin as ApplicationForOpportunityProvider).opportunityId;
 }
 
+String _$applicationByIdHash() => r'56ef7eb458a1ac978cd8eccc974dea54a5fd3f19';
+
+/// See also [applicationById].
+@ProviderFor(applicationById)
+const applicationByIdProvider = ApplicationByIdFamily();
+
+/// See also [applicationById].
+class ApplicationByIdFamily extends Family<AsyncValue<Application?>> {
+  /// See also [applicationById].
+  const ApplicationByIdFamily();
+
+  /// See also [applicationById].
+  ApplicationByIdProvider call(String applicationId) {
+    return ApplicationByIdProvider(applicationId);
+  }
+
+  @override
+  ApplicationByIdProvider getProviderOverride(
+    covariant ApplicationByIdProvider provider,
+  ) {
+    return call(provider.applicationId);
+  }
+
+  static const Iterable<ProviderOrFamily>? _dependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get dependencies => _dependencies;
+
+  static const Iterable<ProviderOrFamily>? _allTransitiveDependencies = null;
+
+  @override
+  Iterable<ProviderOrFamily>? get allTransitiveDependencies =>
+      _allTransitiveDependencies;
+
+  @override
+  String? get name => r'applicationByIdProvider';
+}
+
+/// See also [applicationById].
+class ApplicationByIdProvider extends AutoDisposeStreamProvider<Application?> {
+  /// See also [applicationById].
+  ApplicationByIdProvider(String applicationId)
+    : this._internal(
+        (ref) => applicationById(ref as ApplicationByIdRef, applicationId),
+        from: applicationByIdProvider,
+        name: r'applicationByIdProvider',
+        debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
+            ? null
+            : _$applicationByIdHash,
+        dependencies: ApplicationByIdFamily._dependencies,
+        allTransitiveDependencies:
+            ApplicationByIdFamily._allTransitiveDependencies,
+        applicationId: applicationId,
+      );
+
+  ApplicationByIdProvider._internal(
+    super._createNotifier, {
+    required super.name,
+    required super.dependencies,
+    required super.allTransitiveDependencies,
+    required super.debugGetCreateSourceHash,
+    required super.from,
+    required this.applicationId,
+  }) : super.internal();
+
+  final String applicationId;
+
+  @override
+  Override overrideWith(
+    Stream<Application?> Function(ApplicationByIdRef provider) create,
+  ) {
+    return ProviderOverride(
+      origin: this,
+      override: ApplicationByIdProvider._internal(
+        (ref) => create(ref as ApplicationByIdRef),
+        from: from,
+        name: null,
+        dependencies: null,
+        allTransitiveDependencies: null,
+        debugGetCreateSourceHash: null,
+        applicationId: applicationId,
+      ),
+    );
+  }
+
+  @override
+  AutoDisposeStreamProviderElement<Application?> createElement() {
+    return _ApplicationByIdProviderElement(this);
+  }
+
+  @override
+  bool operator ==(Object other) {
+    return other is ApplicationByIdProvider &&
+        other.applicationId == applicationId;
+  }
+
+  @override
+  int get hashCode {
+    var hash = _SystemHash.combine(0, runtimeType.hashCode);
+    hash = _SystemHash.combine(hash, applicationId.hashCode);
+
+    return _SystemHash.finish(hash);
+  }
+}
+
+@Deprecated('Will be removed in 3.0. Use Ref instead')
+// ignore: unused_element
+mixin ApplicationByIdRef on AutoDisposeStreamProviderRef<Application?> {
+  /// The parameter `applicationId` of this provider.
+  String get applicationId;
+}
+
+class _ApplicationByIdProviderElement
+    extends AutoDisposeStreamProviderElement<Application?>
+    with ApplicationByIdRef {
+  _ApplicationByIdProviderElement(super.provider);
+
+  @override
+  String get applicationId => (origin as ApplicationByIdProvider).applicationId;
+}
+
 String _$studentApplicationsHash() =>
     r'74594059588b827435fc8c7e1265631970f1f8b1';
 

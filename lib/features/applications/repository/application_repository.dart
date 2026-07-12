@@ -22,6 +22,14 @@ class ApplicationRepository {
     });
   }
 
+  Stream<Application?> watchByApplicationId(String applicationId) {
+    return _collection.doc(applicationId).snapshots().map((doc) {
+      final data = doc.data();
+      if (data == null) return null;
+      return applicationFromFirestore(doc.id, data);
+    });
+  }
+
   Stream<List<Application>> watchByStudent(String studentId) {
     return _collection.where('studentId', isEqualTo: studentId).snapshots().map((snapshot) {
       final applications = [

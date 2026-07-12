@@ -1,5 +1,6 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
+import '../../notifications/models/notification_type.dart';
 import '../../notifications/providers/notification_providers.dart';
 import 'chat_providers.dart';
 
@@ -45,7 +46,12 @@ class ChatController extends _$ChatController {
       await ref.read(chatRepositoryProvider).sendMessage(conversationId, senderId, text);
       await ref
           .read(notificationRepositoryProvider)
-          .send(userId: recipientId, message: 'New message: $text');
+          .send(
+            userId: recipientId,
+            type: NotificationType.newMessage,
+            message: 'New message: $text',
+            relatedId: conversationId,
+          );
     });
   }
 }

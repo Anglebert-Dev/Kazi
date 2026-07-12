@@ -7,7 +7,7 @@ part of 'admin_startup_controller.dart';
 // **************************************************************************
 
 String _$adminStartupControllerHash() =>
-    r'73a8740de5a7c386442a79021d9371f088991cf3';
+    r'c98b9a6840119924082308dbe1954f9f5adeebad';
 
 /// See also [AdminStartupController].
 @ProviderFor(AdminStartupController)

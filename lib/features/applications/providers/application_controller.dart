@@ -1,6 +1,7 @@
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 import '../../authentication/providers/auth_providers.dart';
+import '../../notifications/models/notification_type.dart';
 import '../../notifications/providers/notification_providers.dart';
 import '../../opportunities/models/opportunity.dart';
 import '../../student/profile/providers/student_profile_providers.dart';
@@ -45,7 +46,12 @@ class ApplicationController extends _$ApplicationController {
       await ref.read(applicationRepositoryProvider).create(application);
       await ref
           .read(notificationRepositoryProvider)
-          .send(userId: opportunity.startupId, message: 'New applicant for ${opportunity.title}');
+          .send(
+            userId: opportunity.startupId,
+            type: NotificationType.newApplicant,
+            message: 'New applicant for ${opportunity.title}',
+            relatedId: '${userModel.uid}_${opportunity.id}',
+          );
     });
   }
 
@@ -57,7 +63,9 @@ class ApplicationController extends _$ApplicationController {
           .read(notificationRepositoryProvider)
           .send(
             userId: application.studentId,
+            type: NotificationType.applicationStatusChanged,
             message: 'Your application for ${application.opportunityTitle} is now ${status.label}',
+            relatedId: application.id,
           );
     });
   }
