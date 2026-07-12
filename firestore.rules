@@ -53,13 +53,23 @@ service cloud.firestore {
     }
 
     match /applications/{applicationId} {
-      allow read: if isSignedIn() &&
-        (resource.data.studentId == request.auth.uid ||
-         get(/databases/$(database)/documents/startups/$(get(/databases/$(database)/documents/opportunities/$(resource.data.opportunityId)).data.startupId)).data.founderId == request.auth.uid);
+      function isApplicant() {
+        return resource.data.studentId == request.auth.uid;
+      }
+      function isOwnerFounder() {
+        return get(/databases/$(database)/documents/startups/$(resource.data.startupId)).data.founderId == request.auth.uid;
+      }
+
+      allow read: if isSignedIn() && (isApplicant() || isOwnerFounder());
       allow create: if isSignedIn() && request.resource.data.studentId == request.auth.uid;
-      allow update: if isSignedIn() &&
-        (resource.data.studentId == request.auth.uid ||
-         get(/databases/$(database)/documents/startups/$(get(/databases/$(database)/documents/opportunities/$(resource.data.opportunityId)).data.startupId)).data.founderId == request.auth.uid);
+      allow update: if isSignedIn() && (
+        (isApplicant() && request.resource.data.status == resource.data.status) ||
+        (isOwnerFounder() &&
+          request.resource.data.studentId == resource.data.studentId &&
+          request.resource.data.coverNote == resource.data.coverNote &&
+          request.resource.data.cvUrl == resource.data.cvUrl &&
+          request.resource.data.portfolioLink == resource.data.portfolioLink)
+      );
     }
 
     match /bookmarks/{bookmarkId} {

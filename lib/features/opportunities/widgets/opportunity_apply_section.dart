@@ -1,49 +1,82 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import '../../../core/constants/app_spacing.dart';
 import '../../../core/theme/app_colors.dart';
 import '../../../core/widgets/index.dart';
+import '../../applications/providers/application_providers.dart';
+import '../../applications/screens/application_detail_screen.dart';
+import '../../applications/widgets/application_status_badge.dart';
+import '../../authentication/providers/auth_providers.dart';
+import '../../student/applications/screens/opportunity_apply_screen.dart';
+import '../models/opportunity.dart';
 
-class OpportunityApplySection extends StatelessWidget {
-  const OpportunityApplySection({
-    super.key,
-    required this.opportunityTitle,
-    required this.applicationEmail,
-  });
+class OpportunityApplySection extends ConsumerWidget {
+  const OpportunityApplySection({super.key, required this.opportunity});
 
-  final String opportunityTitle;
-  final String applicationEmail;
+  final Opportunity opportunity;
 
   Future<void> _emailCv() async {
     final uri = Uri(
       scheme: 'mailto',
-      path: applicationEmail,
-      query: 'subject=${Uri.encodeComponent('Application for $opportunityTitle')}',
+      path: opportunity.applicationEmail,
+      query: 'subject=${Uri.encodeComponent('Application for ${opportunity.title}')}',
     );
     await launchUrl(uri);
   }
 
   @override
-  Widget build(BuildContext context) {
-    if (applicationEmail.isEmpty) return const SizedBox.shrink();
+  Widget build(BuildContext context, WidgetRef ref) {
+    final userModel = ref.watch(currentUserModelProvider).valueOrNull;
+    final existingApplication = userModel == null
+        ? null
+        : ref
+              .watch(applicationForOpportunityProvider(userModel.uid, opportunity.id))
+              .valueOrNull;
 
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
         const SectionHeader(title: 'How to apply'),
         const SizedBox(height: AppSpacing.sm),
-        Text(
-          'Send your cover note and CV to $applicationEmail',
-          style: const TextStyle(color: AppColors.textSecondary),
-        ),
-        const SizedBox(height: AppSpacing.sm),
-        AppButton(
-          label: 'Apply via email',
-          icon: Icons.email_outlined,
-          onPressed: _emailCv,
-          fullWidth: true,
-        ),
+        if (existingApplication != null) ...[
+          ApplicationStatusBadge(status: existingApplication.status),
+          const SizedBox(height: AppSpacing.sm),
+          AppButton(
+            label: 'View application',
+            icon: Icons.assignment_outlined,
+            variant: AppButtonVariant.secondary,
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => ApplicationDetailScreen(application: existingApplication),
+              ),
+            ),
+            fullWidth: true,
+          ),
+        ] else
+          AppButton(
+            label: 'Apply now',
+            icon: Icons.send_outlined,
+            onPressed: () => Navigator.of(context).push(
+              MaterialPageRoute(
+                builder: (context) => OpportunityApplyScreen(opportunity: opportunity),
+              ),
+            ),
+            fullWidth: true,
+          ),
+        if (opportunity.applicationEmail.isNotEmpty) ...[
+          const SizedBox(height: AppSpacing.sm),
+          Center(
+            child: TextButton(
+              onPressed: _emailCv,
+              child: Text(
+                'Or email directly: ${opportunity.applicationEmail}',
+                style: const TextStyle(color: AppColors.textSecondary),
+              ),
+            ),
+          ),
+        ],
       ],
     );
   }

@@ -104,10 +104,7 @@ class OpportunityDetailScreen extends ConsumerWidget {
               style: const TextStyle(color: AppColors.textSecondary),
             ),
             const SizedBox(height: AppSpacing.lg),
-            OpportunityApplySection(
-              opportunityTitle: opportunity.title,
-              applicationEmail: opportunity.applicationEmail,
-            ),
+            OpportunityApplySection(opportunity: opportunity),
             const SizedBox(height: AppSpacing.lg),
             const SectionHeader(title: 'Description'),
             const SizedBox(height: AppSpacing.sm),

@@ -15,6 +15,7 @@ class AppTextField extends StatelessWidget {
     this.prefixIcon,
     this.suffixIcon,
     this.maxLines = 1,
+    this.minLines,
     this.onChanged,
     this.enabled = true,
   });
@@ -28,6 +29,7 @@ class AppTextField extends StatelessWidget {
   final IconData? prefixIcon;
   final Widget? suffixIcon;
   final int maxLines;
+  final int? minLines;
   final ValueChanged<String>? onChanged;
   final bool enabled;
 
@@ -41,6 +43,7 @@ class AppTextField extends StatelessWidget {
       keyboardType: keyboardType,
       validator: validator,
       maxLines: obscureText ? 1 : maxLines,
+      minLines: obscureText ? 1 : minLines,
       onChanged: onChanged,
       enabled: enabled,
       style: const TextStyle(color: AppColors.textPrimary),
@@ -48,6 +51,7 @@ class AppTextField extends StatelessWidget {
         labelText: label,
         hintText: hint,
         hintStyle: const TextStyle(color: AppColors.textSecondary),
+        alignLabelWithHint: maxLines > 1,
         prefixIcon: prefixIcon != null ? Icon(prefixIcon) : null,
         suffixIcon: suffixIcon,
         filled: true,
